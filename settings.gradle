@@ -1,0 +1,3 @@
+include ':app', ':pullRefresh_library', ':tabpagerindictor'
+project(':pullRefresh_library').projectDir = new File('app/libs/pullRefresh_library')
+project(':tabpagerindictor').projectDir = new File('app/libs/tabpagerindictor')
