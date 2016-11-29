@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_bg_bottom.xml",
+        "source": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\res\\drawable\\indicator_bg_bottom.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_bg_top.xml",
+        "source": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\res\\drawable\\indicator_bg_top.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\res\\merged\\release\\drawable\\nx_gif_refreshing.xml",
+        "source": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\res\\drawable\\nx_gif_refreshing.xml"
+    }
+]

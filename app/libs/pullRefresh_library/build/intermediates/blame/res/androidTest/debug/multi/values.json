@@ -1,0 +1,311 @@
+[
+    {
+        "outputFile": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1664,
+                    "endColumn": 63,
+                    "endOffset": 1723
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1664,
+                        "endColumn": 63,
+                        "endOffset": 1723
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1728,
+                    "endColumn": 63,
+                    "endOffset": 1787
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1728,
+                        "endColumn": 63,
+                        "endOffset": 1787
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1792,
+                    "endColumn": 54,
+                    "endOffset": 1842
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 1792,
+                        "endColumn": 54,
+                        "endOffset": 1842
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1847,
+                    "endColumn": 56,
+                    "endOffset": 1899
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1847,
+                        "endColumn": 56,
+                        "endOffset": 1899
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1904,
+                    "endColumn": 54,
+                    "endOffset": 1954
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1904,
+                        "endColumn": 54,
+                        "endOffset": 1954
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1959,
+                    "endColumn": 37,
+                    "endOffset": 1992
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1959,
+                        "endColumn": 37,
+                        "endOffset": 1992
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1997,
+                    "endColumn": 39,
+                    "endOffset": 2032
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 1997,
+                        "endColumn": 39,
+                        "endOffset": 2032
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 2037,
+                    "endColumn": 38,
+                    "endOffset": 2071
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 2037,
+                        "endColumn": 38,
+                        "endOffset": 2071
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 2076,
+                    "endColumn": 36,
+                    "endOffset": 2108
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 4,
+                        "startOffset": 2076,
+                        "endColumn": 36,
+                        "endOffset": 2108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 2113,
+                    "endColumn": 104,
+                    "endOffset": 2213
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 4,
+                        "startOffset": 2113,
+                        "endColumn": 104,
+                        "endOffset": 2213
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 2218,
+                    "endColumn": 113,
+                    "endOffset": 2327
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 2218,
+                        "endColumn": 113,
+                        "endOffset": 2327
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 2332,
+                    "endColumn": 107,
+                    "endOffset": 2435
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 4,
+                        "startOffset": 2332,
+                        "endColumn": 107,
+                        "endOffset": 2435
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 2440,
+                    "endColumn": 71,
+                    "endOffset": 2507
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 4,
+                        "startOffset": 2440,
+                        "endColumn": 71,
+                        "endOffset": 2507
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 2512,
+                    "endColumn": 74,
+                    "endOffset": 2582
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 4,
+                        "startOffset": 2512,
+                        "endColumn": 74,
+                        "endOffset": 2582
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 2587,
+                    "endColumn": 69,
+                    "endOffset": 2652
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 30,
+                        "startColumn": 4,
+                        "startOffset": 2587,
+                        "endColumn": 69,
+                        "endOffset": 2652
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 2657,
+                    "endColumn": 77,
+                    "endOffset": 2730
+                },
+                "from": {
+                    "file": "D:\\AndroidStudioProjects\\BusinessThrough\\app\\libs\\pullRefresh_library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 31,
+                        "startColumn": 4,
+                        "startOffset": 2657,
+                        "endColumn": 77,
+                        "endOffset": 2730
+                    }
+                }
+            }
+        ]
+    }
+]

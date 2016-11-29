@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/fangyi/businessthrough/bean/business/PrintOrderMain.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/fangyi/businessthrough/business/bean/business/PrintOrderMain.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/fangyi/businessthrough/business/http/WSReturnParam.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/fangyi/businessthrough/business/http/WebService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/fangyi/businessthrough/business/utils/PrintUtil.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/fangyi/businessthrough/http/WSReturnParam.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/fangyi/businessthrough/http/WebService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/fangyi/businessthrough/utils/PrintUtil.java" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
