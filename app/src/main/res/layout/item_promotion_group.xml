@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_promotion_group_fbFName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="促销方案名称"
+            android:textColor="@color/green_pressed"
+            android:textSize="@dimen/text_size_bigger" />
+
+        <TextView
+            android:id="@+id/tv_promotion_group_fbFSaleType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padding_small"
+            android:layout_toRightOf="@+id/tv_promotion_group_fbFName"
+            android:text="促销方式"
+            android:textSize="@dimen/text_size_mid" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_promotion_group_fbFStarDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_promotion_group_fbFName"
+        android:text="生效日期：09 25 2016 12:00AM" />
+
+    <TextView
+        android:id="@+id/tv_promotion_group_fbFEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_promotion_group_fbFStarDate"
+        android:text="失效日期：09 25 2016 12:00AM" />
+
+    <TextView
+        android:id="@+id/tv_promotion_group_fbdFProQty"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_promotion_group_fbFStarDate"
+        android:text="未选套装组合数量："
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_promotion_group_fbdFProAmount"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_promotion_group_fbFStarDate"
+        android:text="未选套装组合金额："
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_promotion_group_fbFSumQty"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_promotion_group_fbFStarDate"
+        android:text="套装组合数量："
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_promotion_group_fbFSumAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_promotion_group_fbFStarDate"
+        android:text="套装组合数量："
+        android:visibility="gone" />
+
+</LinearLayout>

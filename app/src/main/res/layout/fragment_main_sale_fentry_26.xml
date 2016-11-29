@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.song.refresh_view.PullToRefreshView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refreshView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/order_theme_color"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/FYViewLinearLayout"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <!--订货日期-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FFetchDayV"
+                    style="@style/FYViewStyle" />
+                <!--交货日期-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FPlanFetchDay"
+                    style="@style/FYViewStyle" />
+                <!--销售范围-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FAreaPS"
+                    style="@style/FYViewStyle" />
+                <!--销售方式-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FSaleStyle"
+                    style="@style/FYViewStyle" />
+                <!--客户名称-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FCustName"
+                    style="@style/FYViewStyle" />
+                <!--客户地址-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FCustAdd"
+                    style="@style/FYViewStyle" />
+                <!--客户电话-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FCustPho"
+                    style="@style/FYViewStyle" />
+                <!--选择源单-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FSource"
+                    style="@style/FYViewStyle" />
+                <!--业务员-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FEmp"
+                    style="@style/FYViewStyle" />
+                <!--部门-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FDept"
+                    style="@style/FYViewStyle" />
+                <!--仓库-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FDCStock"
+                    style="@style/FYViewStyle" />
+                <!--摘要-->
+                <com.fangyi.businessthrough.view.FYEtItemView
+                    android:id="@+id/fy_FDigest"
+                    style="@style/FYViewStyle" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.fangyi.businessthrough.view.DrawableCenterButton
+                    android:id="@+id/btn_add_goods"
+                    style="@style/BtnStyle"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/btn_add_goods"
+                    android:gravity="left|center_vertical"
+                    android:text="添加商品" />
+
+                <com.fangyi.businessthrough.view.DrawableCenterButton
+                    android:id="@+id/btn_add_donation"
+                    style="@style/BtnStyle"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/btn_add_donation"
+                    android:gravity="left|center_vertical"
+                    android:text="添加赠品" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="-3dp"
+                style="@style/FYViewLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+                    android:id="@+id/recycler_view_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout style="@style/FYViewLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_2px"
+                android:layout_height="wrap_content">
+
+                <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+                    android:id="@+id/recycler_view_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                style="@style/FYViewLinearLayout">
+
+                <TextView
+                    style="@style/FYViewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="合计金额："
+                    android:textColor="@color/text_navy_blue"
+                    android:textSize="@dimen/text_size_bigger_big" />
+
+                <TextView
+                    android:id="@+id/tv_fentry_sum"
+                    android:maxEms="12"
+                    android:singleLine="true"
+                    style="@style/FYViewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18388.88"
+                    android:textSize="@dimen/text_size_bigger_big" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_save_uplpad_print"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.fangyi.businessthrough.view.DrawableCenterButton
+                    android:id="@+id/btn_save_order"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_weight="1"
+                    style="@style/BtnStyle"
+                    android:layout_width="0dp"
+                    android:drawableLeft="@mipmap/btn_save_order"
+                    android:gravity="left|center_vertical"
+                    android:text="保存" />
+
+
+                <com.fangyi.businessthrough.view.DrawableCenterButton
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:id="@+id/btn_print"
+                    style="@style/BtnStyle"
+                    android:layout_width="0dp"
+                    android:drawableLeft="@mipmap/btn_print"
+                    android:gravity="left|center_vertical"
+                    android:layout_weight="1"
+                    android:text="打印" />
+
+                <com.fangyi.businessthrough.view.DrawableCenterButton
+                    android:id="@+id/btn_upload"
+                    style="@style/BtnStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/btn_upload"
+                    android:gravity="left|center_vertical"
+                    android:text="上传" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</com.song.refresh_view.PullToRefreshView>

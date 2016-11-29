@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.fangyi.businessthrough.view.FYBtnRadioView
+        android:id="@+id/fy_start_date"
+        style="@style/FYViewStyle" />
+
+    <com.fangyi.businessthrough.view.FYBtnRadioView
+        android:id="@+id/fy_end_date"
+        style="@style/FYViewStyle" />
+
+    <com.fangyi.businessthrough.view.FYBtnRadioView
+        android:id="@+id/fy_ware_house"
+        style="@style/FYViewStyle" />
+
+    <com.fangyi.businessthrough.view.FYBtnRadioView
+        android:id="@+id/fy_customer_name"
+        style="@style/FYViewStyle" />
+
+</LinearLayout>

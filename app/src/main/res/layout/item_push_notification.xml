@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@android:color/holo_blue_light"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="0dp">
+    <!--android:id="@+id/tv"-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@android:color/holo_blue_light"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_mid"
+        android:textColor="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="通知"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_bigger" />
+
+            <TextView
+                android:id="@+id/tvdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_bigger"
+                android:text="2016年8月8日"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_line2"
+            android:id="@+id/tvcontent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="内容"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_activity_2"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/login_button_shape"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <EditText
+            android:id="@+id/et_usersysid"
+            style="?android:attr/textViewStyle"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入用户名"
+            android:text="02"
+            android:textSize="@dimen/text_size_bigger" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#CACDD1" />
+
+        <EditText
+            android:id="@+id/et_userpassword"
+            style="?android:attr/textViewStyle"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="请输入密码"
+            android:imeActionId="@+id/login"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:text="123456"
+            android:textSize="@dimen/text_size_bigger" />
+
+        </LinearLayout>
+
+
+    <Button
+        android:id="@+id/login_view"
+        style="@style/BtnStyle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/login_button_shape"
+        android:text="登录"
+        android:textColor="@color/main_theme_color"
+        android:textSize="@dimen/text_size_bigger" />
+
+    <LinearLayout
+        android:layout_marginTop="70dp"
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <CheckBox
+            android:id="@+id/cb_antologin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="自动登录"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:id="@+id/tv_change_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="服务器地址"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/text_size_small" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

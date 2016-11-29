@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/iv_down_img"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="@dimen/margin_mid"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_mid"
+        android:layout_toRightOf="@+id/iv_down_img"
+        android:id="@+id/tv_down_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="客户表"
+        android:textSize="@dimen/text_size_big" />
+
+    <Button
+        android:id="@+id/btn_start"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_mid"
+        android:background="@drawable/selector_button_bg"
+        android:text="下载"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_big" />
+
+
+</RelativeLayout>

@@ -1,0 +1,84 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <!-- 欢迎页背景引用刚才写好的 -->
+        <item name="android:windowBackground">@drawable/splash</item>
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <!-- <item name="android:windowIsTranslucent">true</item> --> <!-- 透明背景不要了 -->
+    </style>
+
+    <!--Main-->
+    <style name="radioButton" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/selector_bottom_text</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!--默认分割线-->
+
+    <!--Bcv-->
+    <style name="FYViewStyle">
+        <item name="android:background">@drawable/selector_bg_fybtnradioview</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+        <item name="android:paddingLeft">@dimen/padding_mid</item>
+        <item name="android:paddingRight">@dimen/padding_mid</item>
+        <item name="android:paddingTop">@dimen/padding_small</item>
+    </style>
+
+    <style name="BtnStyle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/selector_button_bg</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginBottom">@dimen/margin_standard</item>
+        <item name="android:layout_marginLeft">@dimen/margin_standard</item>
+        <item name="android:layout_marginRight">@dimen/margin_standard</item>
+        <item name="android:layout_marginTop">@dimen/margin_standard</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_big</item>
+    </style>
+
+    <style name="TvStyle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/shap_btn_bg_gray</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginBottom">@dimen/margin_small</item>
+        <item name="android:layout_marginLeft">@dimen/margin_small</item>
+        <item name="android:layout_marginRight">@dimen/margin_small</item>
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_mid</item>
+    </style>
+
+    <!--listViewItem-->
+    <style name="ItemGoodsStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <!--包裹bcv控件的布局-->
+    <style name="FYViewLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_standard</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
+</resources>

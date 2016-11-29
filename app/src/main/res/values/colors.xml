@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--主题颜色-->
+    <!--<color name="main_theme_color">#00bbcf</color>-->
+    <color name="main_theme_color">#11B6F4</color>
+    <color name="order_theme_color">#EFEFF4</color>
+    <!--基本颜色-->
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="red">#f00</color>
+    <color name="gray">#808080</color>
+    <color name="orange">#fa911e</color>
+    <color name="red_normal">#FF0000</color>
+    <color name="red_pressed">#FF6666</color>
+    <color name="green_pressed">#30A070</color>
+    <color name="purple_pressed">#9F79EE</color>
+
+
+    <!--字体颜色-->
+    <color name="text_color_big">#333333</color>
+    <color name="text_color_small">#999999</color>
+    <color name="text_user_account">#f25733</color>
+    <color name="text_payway">#6cace8</color>
+    <!--<color name="text_green">#B5DE70</color>-->
+    <color name="text_green">#6EC985</color>
+    <color name="text_navy_blue">#25406D</color>
+    <!--分割线的颜色-->
+    <color name="divider_line">#dcdcdc</color>
+    <color name="grey_line">#dcdcdc</color>
+    <!--半透明色-->
+    <!--背景颜色-->
+    <color name="bg_theme">#f5f5f5</color>
+    <color name="dark_blue">#2D78B1</color>
+
+    <color name="sv_blue">#688fdb</color>
+
+
+</resources>

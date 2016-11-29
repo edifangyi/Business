@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_mid"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="设置自动更新"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_big" />
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_marginLeft="@dimen/margin_mid"
+        android:text="当前自动升级已关闭"
+        android:textSize="@dimen/text_size_small" />
+
+    <CheckBox
+        android:id="@+id/cb_setting_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_mid"
+        android:clickable="false"
+        android:focusable="false" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/margin_mid"
+        android:layout_marginRight="@dimen/margin_mid"
+        android:background="#99000000" />
+
+</RelativeLayout>

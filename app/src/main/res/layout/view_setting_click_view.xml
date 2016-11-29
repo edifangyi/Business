@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="设置自动更新"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:ellipsize="end"
+        android:maxEms="15"
+        android:id="@+id/tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_marginLeft="10dp"
+        android:singleLine="true"
+        android:text="当前自动升级已关闭当前自动升级已关闭当前自动升级已关闭当前自动升级已关闭"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:layout_marginRight="-3dp"
+        android:id="@+id/iv_click_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/selector_btn_view_bg" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#99000000" />
+
+</RelativeLayout>

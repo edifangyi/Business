@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_theme"
+    android:orientation="vertical">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:background="@mipmap/head_report_baby_bg">
+
+
+        <TextView
+            android:id="@+id/me_month_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="54dp"
+            android:layout_marginTop="25dp"
+            android:text="12.23"
+            android:textColor="@color/white"
+            android:textSize="55sp"
+            android:layout_marginEnd="18dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/me_convert_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="80"
+                android:textColor="@color/text_color_big"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/me_convert_percent"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="1dp"
+                android:layout_toRightOf="@+id/me_convert_percent"
+                android:text="条"
+                android:textColor="@color/text_color_small"
+                android:textSize="@dimen/text_size_smaller" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_convert_percent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="未打印单据"
+                android:textColor="@color/text_color_small"
+                android:textSize="@dimen/text_size_smaller" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@color/grey_line" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/me_use_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="80"
+                android:textColor="@color/text_color_big"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/me_use_percent"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="1dp"
+                android:layout_toRightOf="@+id/me_use_percent"
+                android:text="条"
+                android:textColor="@color/text_color_small"
+                android:textSize="@dimen/text_size_smaller" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_use_percent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="未上传单据"
+                android:textColor="@color/text_color_small"
+                android:textSize="@dimen/text_size_smaller" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@color/grey_line" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/me_online_park"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="80"
+                android:textColor="@color/text_color_big"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/me_online_park"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="1dp"
+                android:layout_toRightOf="@+id/me_online_park"
+                android:text="天"
+                android:textColor="@color/text_color_small"
+                android:textSize="@dimen/text_size_smaller" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_online_park"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="未下载天数"
+                android:textColor="@color/text_color_small"
+                android:textSize="@dimen/text_size_smaller" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@color/grey_line" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/me_offline_park"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="80"
+                android:textColor="@color/text_color_big"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/me_offline_park"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="1dp"
+                android:layout_toRightOf="@+id/me_offline_park"
+                android:text="天"
+                android:textColor="@color/text_color_small"
+                android:textSize="@dimen/text_size_smaller" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_offline_park"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="未上传天数"
+                android:textColor="@color/text_color_small"
+                android:textSize="@dimen/text_size_smaller" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="9dp"
+        android:background="@color/bg_theme" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/me_operation_center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_clicked"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/me_oc_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/me_oc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:layout_toRightOf="@+id/me_oc_image"
+                    android:text="单据上传" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@color/grey_line" />
+
+        <RelativeLayout
+            android:id="@+id/me_consume_center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_clicked"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/me_cc_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/me_cc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:layout_toRightOf="@+id/me_cc_image"
+                    android:text="资料下载" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/me_manager_center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_clicked"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/me_mc_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/me_mc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:layout_toRightOf="@+id/me_mc_image"
+                    android:text="单据下载" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:background="@color/grey_line" />
+
+        <RelativeLayout
+            android:id="@+id/me_data_center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_clicked"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/me_dc_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/me_dc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:layout_toRightOf="@+id/me_dc_image"
+                    android:text="数据清理" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line" />
+</LinearLayout>

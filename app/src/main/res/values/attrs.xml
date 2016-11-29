@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--TabIndicator的参数设置-->
+    <declare-styleable name="PagerSlidingTab">
+        <attr name="indicatorColor" format="color" />
+        <attr name="underlineColor" format="color" />
+        <attr name="dividerColor" format="color" />
+        <attr name="indicatorHeight" format="dimension" />
+        <attr name="underlineHeight" format="dimension" />
+        <attr name="pst_dividerPadding" format="dimension" />
+        <attr name="tabPaddingLeftRight" format="dimension" />
+        <attr name="scrollOffset" format="dimension" />
+        <attr name="tabBackgrounds" format="reference" />
+        <attr name="sameLine" format="boolean" />
+        <attr name="pst_textAllCaps" format="boolean" />
+    </declare-styleable>
+
+    <!--属性的集合-->
+    <declare-styleable name="SettingItemView">
+        <!--定义一个String类型的属性-->
+        <attr name="update_off" format="string" />
+        <attr name="update_on" format="string" />
+    </declare-styleable>
+
+
+
+</resources>

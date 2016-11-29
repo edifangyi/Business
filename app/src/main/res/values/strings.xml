@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">业务通</string>
+
+    <array name="main_tab">
+        <item>销售</item>
+        <item>采购</item>
+        <item>库存</item>
+    </array>
+
+    <array name="sale_ietm">
+        <item>销售订单</item>
+        <item>销售出库</item>
+        <item>退货通知</item>
+        <item>销售退货</item>
+        <item>销售查询</item>
+        <item>销售总汇</item>
+        <item>销售排行</item>
+    </array>
+
+    <array name="purchase_ietm">
+        <item>采购申请</item>
+        <item>采购入库</item>
+        <item>退货通知</item>
+        <item>采购退货</item>
+        <item>采购查询</item>
+        <item>采购总汇</item>
+    </array>
+
+    <array name="stock_ietm">
+        <item>仓库调拨</item>
+        <item>调拨查询</item>
+        <item>即时库存</item>
+    </array>
+
+    <array name="fbillxsfilter_ietm">
+        <item>销售订单</item>
+        <item>销售出库</item>
+        <item>退货通知</item>
+        <item>销售退货</item>
+    </array>
+
+    <array name="fbillcgFilter_ietm">
+        <item>采购申请</item>
+        <item>采购入库</item>
+        <item>退货通知</item>
+        <item>采购退货</item>
+    </array>
+
+
+</resources>

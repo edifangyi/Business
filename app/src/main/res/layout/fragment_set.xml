@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fangyi="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.fangyi.businessthrough.view.SettingItemView
+            android:visibility="gone"
+            android:id="@+id/siv_auto_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fangyi:title="设置自动登录"
+            fangyi:update_off="当前自动登录已经关闭"
+            fangyi:update_on="当前自动登录已经开启" />
+
+        <com.fangyi.businessthrough.view.SettingItemView
+            android:id="@+id/siv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fangyi:title="设置系统通知"
+            fangyi:update_off="当前系统通知已经关闭"
+            fangyi:update_on="当前系统通知已经开启" />
+
+        <!--<com.fangyi.businessthrough.view.SettingItemView-->
+        <!--android:id="@+id/siv_select_dpartment"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--fangyi:title="选用部门设置"-->
+        <!--fangyi:update_off="当前部门选择已经关闭"-->
+        <!--fangyi:update_on="当前部门选择已经开启" />-->
+
+        <!--<com.fangyi.businessthrough.view.SettingItemView-->
+        <!--android:id="@+id/siv_select_warehouse"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--fangyi:title="选用仓库设置"-->
+        <!--fangyi:update_off="当前仓库选择已经关闭"-->
+        <!--fangyi:update_on="当前仓库选择已经开启" />-->
+
+        <!--<com.fangyi.businessthrough.view.SettingClickView-->
+        <!--android:id="@+id/scv_default_warehouse_address"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--fangyi:title="默认仓库地址" />-->
+
+        <com.fangyi.businessthrough.view.SettingClickView
+            android:id="@+id/scv_change_service_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fangyi:title="更改服务器地址" />
+
+        <com.fangyi.businessthrough.view.SettingClickView
+            android:id="@+id/scv_printed_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fangyi:title="打印单据页面设置" />
+
+
+        <com.fangyi.businessthrough.view.SettingClickView
+            android:id="@+id/scv_change_fcompany_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fangyi:title="公司名称" />
+
+        <com.fangyi.businessthrough.view.SettingClickView
+            android:id="@+id/scv_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fangyi:title="关于" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>

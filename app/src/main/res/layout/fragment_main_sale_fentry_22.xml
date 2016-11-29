@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.song.refresh_view.PullToRefreshView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refreshView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:background="@color/order_theme_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/FYViewLinearLayout"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <!--申请日期-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FFetchDayV"
+                    style="@style/FYViewStyle" />
+                <!--采购日期-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FPlanFetchDay1"
+                    style="@style/FYViewStyle" />
+                <!--到货日期-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FPlanFetchDay2"
+                    style="@style/FYViewStyle" />
+
+                <!--采购方式-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FPOStyle"
+                    style="@style/FYViewStyle" />
+
+                <!--销售范围-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FAreaPS"
+                    style="@style/FYViewStyle" />
+                <!--业务类型-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FBizType"
+                    style="@style/FYViewStyle" />
+
+
+                <!--选择源单-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FSource"
+                    style="@style/FYViewStyle" />
+
+                <!--供应商-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FSupplier"
+                    style="@style/FYViewStyle" />
+
+                <!--业务员-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FRequester"
+                    style="@style/FYViewStyle" />
+                <!--部门-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FDept"
+                    style="@style/FYViewStyle" />
+
+                <!--验收-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FFManager"
+                    style="@style/FYViewStyle" />
+                <!--保管-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FSManager"
+                    style="@style/FYViewStyle" />
+                <!--仓库-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FDCStock"
+                    style="@style/FYViewStyle" />
+                <!--摘要-->
+                <com.fangyi.businessthrough.view.FYEtItemView
+                    android:id="@+id/fy_FDigest"
+                    style="@style/FYViewStyle" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.fangyi.businessthrough.view.DrawableCenterButton
+                    android:id="@+id/btn_add_goods"
+                    style="@style/BtnStyle"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/btn_add_goods"
+                    android:gravity="left|center_vertical"
+                    android:text="添加商品" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/FYViewLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="-3dp"
+                android:layout_height="wrap_content">
+
+
+                <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+                    android:id="@+id/recycler_view_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_fentry_sum"
+                style="@style/FYViewLinearLayout"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/FYViewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="合计金额："
+                    android:textColor="@color/text_navy_blue"
+                    android:textSize="@dimen/text_size_bigger_big" />
+
+                <TextView
+                    android:id="@+id/tv_fentry_sum"
+                    style="@style/FYViewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxEms="12"
+                    android:singleLine="true"
+                    android:text="18388.88"
+                    android:textSize="@dimen/text_size_bigger_big" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_save_uplpad_print"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.fangyi.businessthrough.view.DrawableCenterButton
+                    android:id="@+id/btn_save_order"
+                    style="@style/BtnStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/btn_save_order"
+                    android:gravity="left|center_vertical"
+                    android:text="保存" />
+
+
+                <com.fangyi.businessthrough.view.DrawableCenterButton
+                    android:id="@+id/btn_print"
+                    style="@style/BtnStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/btn_print"
+                    android:gravity="left|center_vertical"
+                    android:text="打印" />
+
+                <com.fangyi.businessthrough.view.DrawableCenterButton
+                    android:id="@+id/btn_upload"
+                    style="@style/BtnStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/btn_upload"
+                    android:gravity="left|center_vertical"
+                    android:text="上传" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</com.song.refresh_view.PullToRefreshView>

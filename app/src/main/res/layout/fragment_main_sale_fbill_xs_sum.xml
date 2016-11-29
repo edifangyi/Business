@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/FYViewLinearLayout"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+            <!--起始时间-->
+            <com.fangyi.businessthrough.view.FYBtnRadioView
+                android:id="@+id/fy_start_date"
+                style="@style/FYViewStyle" />
+            <!--截止时间-->
+            <com.fangyi.businessthrough.view.FYBtnRadioView
+                android:id="@+id/fy_end_date"
+                style="@style/FYViewStyle" />
+            <!--客户名称-->
+            <com.fangyi.businessthrough.view.FYBtnRadioView
+                android:id="@+id/fy_customer_name"
+                style="@style/FYViewStyle" />
+            <!--客户名称-->
+            <com.fangyi.businessthrough.view.FYBtnRadioView
+                android:id="@+id/fy_emp"
+                style="@style/FYViewStyle" />
+            <!--部门-->
+            <com.fangyi.businessthrough.view.FYBtnRadioView
+                android:id="@+id/fy_dept"
+                style="@style/FYViewStyle" />
+            <!--商品-->
+            <com.fangyi.businessthrough.view.FYBtnRadioView
+                android:id="@+id/fy_goods"
+                style="@style/FYViewStyle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/FYViewLinearLayout"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_mid"
+                android:paddingLeft="@dimen/padding_big"
+                android:text="单据类型"
+                android:textColor="@color/text_payway"
+                android:textSize="@dimen/text_size_bigger" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big">
+
+                <CheckBox
+                    android:id="@+id/rb_26"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="销售订货"
+                    android:textColor="@color/text_payway"
+                    android:textSize="@dimen/text_size_big" />
+
+                <CheckBox
+                    android:id="@+id/rb_28"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="退货通知"
+                    android:textColor="@color/text_payway"
+                    android:textSize="@dimen/text_size_big" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big">
+
+                <CheckBox
+                    android:id="@+id/cb_27"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="销售出库"
+                    android:textColor="@color/text_payway"
+                    android:textSize="@dimen/text_size_big" />
+
+                <CheckBox
+                    android:id="@+id/cb_29"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="销售退货"
+                    android:textColor="@color/text_payway"
+                    android:textSize="@dimen/text_size_big" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/FYViewLinearLayout"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_mid"
+                android:paddingLeft="@dimen/padding_big"
+                android:text="汇总依据"
+                android:textColor="@color/text_payway"
+                android:textSize="@dimen/text_size_bigger" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big">
+
+                <CheckBox
+                    android:id="@+id/cb_goods"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="商品"
+                    android:textColor="@color/text_payway"
+                    android:textSize="@dimen/text_size_big" />
+
+                <CheckBox
+                    android:id="@+id/cb_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="客户"
+                    android:textColor="@color/text_payway"
+                    android:textSize="@dimen/text_size_big" />
+
+                <CheckBox
+                    android:id="@+id/cb_goods_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="商品+客户"
+                    android:textColor="@color/text_payway"
+                    android:textSize="@dimen/text_size_big" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.fangyi.businessthrough.view.DrawableCenterButton
+                android:id="@+id/btn_summarizing"
+                style="@style/BtnStyle"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/btn_summarizing"
+                android:drawablePadding="@dimen/padding_mid"
+                android:gravity="left|center_vertical"
+                android:text="查询" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

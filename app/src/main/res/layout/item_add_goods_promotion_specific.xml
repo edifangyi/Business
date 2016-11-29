@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="61dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_mid">
+
+    <LinearLayout
+        android:id="@+id/ll_name_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_goods_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="商品名称"
+            android:textSize="@dimen/text_size_bigger" />
+
+        <TextView
+            android:id="@+id/tv_goods_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="商品类型"
+            android:textSize="@dimen/text_size_bigger" />
+
+        <TextView
+            android:id="@+id/tv_fName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center_vertical"
+            android:text="促销方案名称" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_goods_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_name_type"
+        android:layout_marginBottom="@dimen/margin_mid"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/ItemGoodsStyle"
+            android:layout_width="wrap_content"
+            android:text="数量："
+            android:textColor="@color/text_payway" />
+
+        <TextView
+            android:id="@+id/tv_goods_count"
+            style="@style/ItemGoodsStyle"
+            android:layout_weight="2"
+            android:text="81645件" />
+
+        <TextView
+            style="@style/ItemGoodsStyle"
+            android:layout_width="wrap_content"
+            android:text="单价："
+            android:textColor="@color/text_payway" />
+
+        <TextView
+            android:id="@+id/tv_goods_price"
+            style="@style/ItemGoodsStyle"
+            android:layout_weight="1"
+            android:text="1.88" />
+
+        <TextView
+            style="@style/ItemGoodsStyle"
+            android:layout_width="wrap_content"
+            android:text="金额："
+            android:textColor="@color/text_payway" />
+
+        <TextView
+            android:id="@+id/tv_goods_sum"
+            style="@style/ItemGoodsStyle"
+            android:layout_weight="1"
+            android:text="1183.66" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_goods_promotion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_name_type"
+        android:layout_marginBottom="@dimen/margin_mid"
+        android:orientation="horizontal">
+
+
+        <TextView
+            style="@style/ItemGoodsStyle"
+            android:layout_width="wrap_content"
+            android:text="数量："
+            android:textColor="@color/text_payway" />
+
+        <TextView
+            android:id="@+id/tv_goods_promotion_count"
+            style="@style/ItemGoodsStyle"
+            android:layout_weight="1"
+            android:text="81645件" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
