@@ -19,25 +19,25 @@ import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.fangyi.businessthrough.R;
-import com.fangyi.businessthrough.activity.business.AddGoodsActivity;
+import com.fangyi.businessthrough.activity.business.AddGoods_3_Activity;
 import com.fangyi.businessthrough.adapter.business.MenuAddGoodsAdapter;
 import com.fangyi.businessthrough.base.BaseFragment;
 import com.fangyi.businessthrough.bean.business.PrintPurchaseOrderMain;
 import com.fangyi.businessthrough.bean.system.FEntry_22_Set;
-import com.fangyi.businessthrough.parameter.SystemFieldValues;
 import com.fangyi.businessthrough.bean.system.User;
 import com.fangyi.businessthrough.bean.system.Users;
+import com.fangyi.businessthrough.bluetoothprint.PrintDataService;
+import com.fangyi.businessthrough.bluetoothprint.PrintUtil;
 import com.fangyi.businessthrough.dao.DBBusiness;
 import com.fangyi.businessthrough.dao.DBManager;
 import com.fangyi.businessthrough.data.Data;
 import com.fangyi.businessthrough.events.AddGoodsMessage;
-import com.fangyi.businessthrough.utils.system.RebootActivity;
 import com.fangyi.businessthrough.http.NetConnectionUtil;
 import com.fangyi.businessthrough.http.WebUploadService;
+import com.fangyi.businessthrough.parameter.SystemFieldValues;
 import com.fangyi.businessthrough.utils.system.CommonUtils;
 import com.fangyi.businessthrough.utils.system.PrefUtils;
-import com.fangyi.businessthrough.bluetoothprint.PrintDataService;
-import com.fangyi.businessthrough.bluetoothprint.PrintUtil;
+import com.fangyi.businessthrough.utils.system.RebootActivity;
 import com.fangyi.businessthrough.view.DrawableCenterButton;
 import com.fangyi.businessthrough.view.FYBtnRadioView;
 import com.fangyi.businessthrough.view.FYEtItemView;
@@ -58,11 +58,11 @@ import java.util.List;
 import java.util.Map;
 
 import static com.fangyi.businessthrough.application.FYApplication.ADD_GOODS_REQ_CODE;
-import static com.fangyi.businessthrough.utils.system.CommonUtils.getColor;
 import static com.fangyi.businessthrough.utils.business.DateUtil.getStrToDate;
 import static com.fangyi.businessthrough.utils.business.DateUtil.getTime;
 import static com.fangyi.businessthrough.utils.business.DateUtil.getTimeNYR;
 import static com.fangyi.businessthrough.utils.business.StrFormatUtils.getStringsFormat;
+import static com.fangyi.businessthrough.utils.system.CommonUtils.getColor;
 
 
 /**
@@ -624,16 +624,12 @@ public class FEntry22Fragment extends BaseFragment {
      * 添加商品
      */
     private void startAddGoods() {
-        Intent intent = new Intent(getActivity(), AddGoodsActivity.class);
-        intent.putExtra("addType", "0");
-        intent.putExtra("businessType", "1");//businessType
-        intent.putExtra("fChooseAmount", "0");//允许修改单价金额
+        Intent intent = new Intent(getActivity(), AddGoods_3_Activity.class);
+
+        intent.putExtra("businessType", businessType);//businessType
         intent.putExtra("fDCStockD", "0");//仓库
         intent.putExtra("fStockPosition", "0");//仓库 在添加页面
-        intent.putExtra("fPlanPro", "0");//启用搭赠方案
-        intent.putExtra("userSysID", LoginUsers.userSysID);//传登陆用户ID
         intent.putExtra("kISID", LoginUsers.kISID);//传登陆用户KISID
-        intent.putExtra("fyFCustNameID", "");//传登陆用户KISID
 
         startActivityForResult(intent, ADD_GOODS_REQ_CODE);
     }

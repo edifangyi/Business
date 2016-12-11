@@ -9,6 +9,8 @@ import com.fangyi.businessthrough.data.Data;
 import com.fangyi.businessthrough.utils.system.PrefUtils;
 import com.socks.library.KLog;
 
+import java.util.List;
+
 import static com.fangyi.businessthrough.application.FYApplication.getContext;
 
 /**
@@ -99,6 +101,42 @@ public class WebUploadService {
                     result = "上传成功";
                 } else {
                     result = "上传失败";
+                }
+            }
+        }.start();
+
+        return result;
+    }
+
+
+    /**
+     * 整单上传
+     */
+    public static String uploadDateService(final FragmentActivity activity, final String businessType) {
+
+        new Thread() {
+            @Override
+            public void run() {
+                DBBusiness manager = new DBBusiness(activity);
+                List<PrintOrderMain> orderMains = manager.getOrderInfo(businessType);
+
+
+                for (PrintOrderMain orderMain : orderMains) {
+
+                    String proStr = Data.getUploadProStr(getContext(), orderMain, businessType);
+
+                    WebService ws = new WebService(PrefUtils.getString(getContext(), "is_service_address", null));
+                    String res = ws.uploadData(proStr);
+
+                    KLog.e("=====" + res);
+
+                    if ("1".equals(res.substring(0, 1))) {
+                        manager.upDateOrderIsUpload(orderMain.id, businessType);//更改表单中上传状态
+                        result = "上传成功";
+                    } else {
+                        result = "上传失败";
+                    }
+
                 }
             }
         }.start();

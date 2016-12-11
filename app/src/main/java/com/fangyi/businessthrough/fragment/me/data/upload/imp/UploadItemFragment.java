@@ -1,4 +1,4 @@
-package com.fangyi.businessthrough.fragment.me.data;
+package com.fangyi.businessthrough.fragment.me.data.upload.imp;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -15,36 +15,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fangyi.businessthrough.R;
-import com.fangyi.businessthrough.application.FYApplication;
 import com.fangyi.businessthrough.base.BaseFragment;
 import com.fangyi.businessthrough.bean.system.User;
-import com.fangyi.businessthrough.dao.DBManager;
-import com.fangyi.businessthrough.dao.ProtocolUtil;
 import com.fangyi.businessthrough.fragment.me.data.task.TaskInfo;
 import com.fangyi.businessthrough.http.NetConnectionUtil;
-import com.fangyi.businessthrough.http.WSReturnParam;
-import com.fangyi.businessthrough.http.WebService;
+import com.fangyi.businessthrough.http.WebUploadService;
 import com.fangyi.businessthrough.utils.system.PrefUtils;
-import com.socks.library.KLog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.fangyi.businessthrough.utils.business.DateUtil.getTimeYYYY_MM_dd;
+import static com.socks.library.KLog.e;
+
 
 /**
  * Created by FANGYI on 2016/8/27.
  */
 
-public class DownloadDataFragment extends BaseFragment {
+public class UploadItemFragment extends BaseFragment {
 
 
     @BindView(R.id.downloadAll)
@@ -55,7 +50,7 @@ public class DownloadDataFragment extends BaseFragment {
     private List<TaskInfo> taskInfos;//所有在运行的进程列表
     private User LoginUser;
     private ProgressDialog dialog;
-
+    private String businessType;
 
 
     Handler handler = new Handler() {
@@ -74,17 +69,34 @@ public class DownloadDataFragment extends BaseFragment {
                     break;
                 case 3:
                     dialog.dismiss();
-                    KLog.e("====11232=========" + msg.arg1);
+
                     View view = getViewByPosition(msg.arg1, lvDownloadList);
                     ViewHolder holder = (ViewHolder) view.getTag();
                     holder.btnStart = (Button) view.findViewById(R.id.btn_start);
-                    holder.btnStart.setText("下载完成");
+                    if (msg.arg2 == 0) {
+                        holder.btnStart.setText("上传失败");
+                    } else if (msg.arg2 == 1) {
+                        holder.btnStart.setText("上传完成");
+                    }
+
                     break;
+
             }
         }
     };
-    private boolean isDownload = false;
+    private boolean isDownload;
 
+    public UploadItemFragment() {
+
+    }
+
+    public static UploadItemFragment getInstance(String s) {
+        UploadItemFragment itemFragment = new UploadItemFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("businessType", s);
+        itemFragment.setArguments(bundle);
+        return itemFragment;
+    }
 
     public View getViewByPosition(int pos, ListView listView) {
         final int firstListItemPosition = listView.getFirstVisiblePosition();
@@ -103,8 +115,24 @@ public class DownloadDataFragment extends BaseFragment {
     protected View getSuccessView() {
         EventBus.getDefault().register(this);//订阅
         View view = View.inflate(getActivity(), R.layout.fragment_me_download, null);
-        lvDownloadList = (ListView) view.findViewById(R.id.lv_download_list);
         ButterKnife.bind(this, view);
+
+        Bundle args = getArguments();
+        businessType = args.getString("businessType");
+
+        setNetwork(view);
+        fillData();
+        setListener();
+        return view;
+    }
+
+    /**
+     * 判断网络环境
+     *
+     * @param view
+     */
+    private void setNetwork(View view) {
+        lvDownloadList = (ListView) view.findViewById(R.id.lv_download_list);
 
         //判断网络是否可用
         if (NetConnectionUtil.isNetworkAvailable(getContext())) {
@@ -115,16 +143,7 @@ public class DownloadDataFragment extends BaseFragment {
             }
         } else {
             isDownload = false;
-
-
         }
-
-        fillData();
-        setListener();
-
-
-
-        return view;
     }
 
     /**
@@ -146,6 +165,7 @@ public class DownloadDataFragment extends BaseFragment {
             @Override
             public void run() {
                 taskInfos = getAllTaskInfos();
+                e("==00000000===" + taskInfos.size());
                 handler.sendEmptyMessage(0);
             }
         }.start();
@@ -155,19 +175,40 @@ public class DownloadDataFragment extends BaseFragment {
     private List<TaskInfo> getAllTaskInfos() {
 
         List<TaskInfo> taskInfos = new ArrayList<>();
-        String[] showName = {"客户表", "商品表", "价格表",
-                "联系人", "业务表", "参数表",
-                "仓库表", "赠品方案", "赠品详细", "单位表"};
-        String[] tableName = {"Customer", "Goods", "ItemPrice",
-                "Phone", "UserCustomer", "Parameter",
-                "WareHouse", "FreeBill", "FreeBillDetail", "UnitGroup"};
-        String userSysID = LoginUser.userSysID;
-        String[] param = {userSysID + ",1999-01-01", userSysID + ",0", userSysID + ",0",
-                userSysID + "", userSysID + "", userSysID + "",
-                userSysID + "", userSysID + "", userSysID + "", userSysID + ""};
-        int ids[] = {R.mipmap.customer, R.mipmap.goods, R.mipmap.iterprice,
-                R.mipmap.phone, R.mipmap.usercustomer, R.mipmap.parameter,
-                R.mipmap.warehouse, R.mipmap.freebill, R.mipmap.freebilldetail, R.mipmap.freebilldetail};
+
+        String[] showName = null;
+        String[] tableName = null;
+        String userSysID = null;
+        String[] param = null;
+        int[] ids = null;
+        if ("0".equals(businessType)) {
+            showName = new String[]{"销售订单", "销售出库", "退货通知", "销售退货"};
+            tableName = new String[]{"1", "2", "3", "0"};
+            userSysID = LoginUser.userSysID;
+            param = new String[]{"销售订单", "销售出库", "退货通知", "销售退货"};
+
+            ids = new int[]{R.mipmap.sale_26, R.mipmap.sale_27, R.mipmap.sale_28,
+                    R.mipmap.sale_29};
+
+
+        } else if ("1".equals(businessType)) {
+
+            showName = new String[]{"采购申请", "采购入库", "退货通知", "采购退货"};
+            tableName = new String[]{"4", "5", "6", "7"};
+            userSysID = LoginUser.userSysID;
+            param = new String[]{"销售订单", "销售出库", "退货通知", "销售退货"};
+
+            ids = new int[]{R.mipmap.purchase_22, R.mipmap.purchase_23, R.mipmap.purchase_24,
+                    R.mipmap.purchase_25};
+
+        } else if ("2".equals(businessType)) {
+
+            showName = new String[]{"销售单据"};
+            tableName = new String[]{"8"};
+            userSysID = LoginUser.userSysID;
+            param = new String[]{"销售订单"};
+            ids = new int[]{R.mipmap.ware_30};
+        }
 
         for (int i = 0; i < tableName.length; i++) {
             TaskInfo taskInfo = new TaskInfo();
@@ -197,51 +238,9 @@ public class DownloadDataFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.downloadAll:
-                downloadAll();
+
                 break;
         }
-    }
-
-
-    /**
-     * 全部下载
-     */
-    private void downloadAll() {
-        new Thread() {
-            @Override
-            public void run() {
-                for (TaskInfo taskInfo : taskInfos) {
-
-                    WSReturnParam wsParam = new WSReturnParam();
-                    wsParam.result = 0; // 执行结果
-                    wsParam.totalPg = 0;// 总共还需执行页数
-                    Integer currentPg = 0; // 当前执行页数
-                    String tableName = taskInfo.getTableName(); //表名
-                    String param = taskInfo.getParam();
-
-                    DBManager dbManager = new DBManager(FYApplication.getContext());
-                    final String WSserviceAddress = PrefUtils.getString(getContext(), "is_service_address", null);
-                    WebService webService = new WebService(WSserviceAddress);
-                    dbManager.deleteDownloadData(tableName);
-
-                    String protoStr = webService.getData(wsParam, currentPg, tableName, param);
-                    List<String> customer = ProtocolUtil.getInsertSQL(tableName, protoStr);
-                    dbManager.insertDownloadData(customer);
-
-                    int a = wsParam.totalPg;
-
-                    while (a >= 2) {
-                        for (int i = 0; i < a - 1; i++) {
-                            String protoStrs = webService.getData(wsParam, currentPg, tableName, param);
-                            List<String> customers = ProtocolUtil.getInsertSQL(tableName, protoStrs);
-                            dbManager.insertDownloadData(customers);
-                        }
-                    }
-
-                    dbManager.closeDB();
-                }
-            }
-        }.start();
     }
 
 
@@ -261,55 +260,24 @@ public class DownloadDataFragment extends BaseFragment {
         dialog.show();
 
 
-        new Thread() {
-            @Override
-            public void run() {
+        String result = WebUploadService.uploadDateService(getActivity(), taskInfo.getTableName());
 
+        int state;
+        if ("上传失败".equals(result)) {
+            dialog.dismiss();
+            Toast.makeText(getContext(), "上传失败", Toast.LENGTH_SHORT).show();
+            state = 0;
+        } else {
+            dialog.dismiss();
+            Toast.makeText(getContext(), "上传成功", Toast.LENGTH_SHORT).show();
+            state = 1;
+        }
 
-                WSReturnParam wsParam = new WSReturnParam();
-                wsParam.result = 0; // 执行结果
-                wsParam.totalPg = 0;// 总共还需执行页数
-                Integer currentPg = 0; // 当前执行页数
-                String tableName = taskInfo.getTableName(); //表名
-                String param = taskInfo.getParam();
-
-                DBManager dbManager = new DBManager(FYApplication.getContext());
-                final String WSserviceAddress = PrefUtils.getString(getContext(), "is_service_address", null);
-                WebService webService = new WebService(WSserviceAddress);
-                dbManager.deleteDownloadData(tableName);
-
-                String protoStr = webService.getData(wsParam, currentPg, tableName, param);
-                List<String> customer = ProtocolUtil.getInsertSQL(tableName, protoStr);
-
-
-                dbManager.insertDownloadData(customer);
-
-                final int a = wsParam.totalPg;
-                dialog.setMax(a);
-                int i = 0;
-
-                while (wsParam.totalPg > 1) {
-
-                    String protoStrs = webService.getData(wsParam, currentPg, tableName, param);
-                    List<String> customers = ProtocolUtil.getInsertSQL(tableName, protoStrs);
-                    dbManager.insertDownloadData(customers);
-                    dialog.setProgress(i++);
-                }
-                dbManager.closeDB();
-
-
-                PrefUtils.setBoolean(FYApplication.getContext(), "is_frist_login_download", true);
-                String time = getTimeYYYY_MM_dd(new Date());
-                PrefUtils.setString(FYApplication.getContext(), "is_judge_overtime_download", time);
-
-
-                Message message = new Message();
-                message.what = 3;
-                message.arg1 = position;
-                handler.sendMessage(message);
-
-            }
-        }.start();
+        Message message = new Message();
+        message.what = 3;
+        message.arg1 = position;
+        message.arg2 = state;
+        handler.sendMessage(message);
     }
 
 
@@ -355,19 +323,21 @@ public class DownloadDataFragment extends BaseFragment {
             }
             holder.ivDownImg.setImageResource(taskInfos.get(position).getIcon());
             holder.tvDownName.setText(taskInfos.get(position).getShowName());
-
+            holder.btnStart.setText("上传");
+            //判断网络是否可用
             if (isDownload) {
                 holder.btnStart.setEnabled(true);
             } else {
-                holder.btnStart.setText("没有服务");
                 holder.btnStart.setEnabled(false);
+                holder.btnStart.setText("没有服务");
             }
+
 
             //通信
             holder.btnStart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.btnStart.setText("正在下载");
+                    holder.btnStart.setText("正在上传");
                     holder.btnStart.setEnabled(false);
                     Message message = new Message();
                     message.arg1 = position;

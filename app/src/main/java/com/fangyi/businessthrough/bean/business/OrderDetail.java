@@ -14,7 +14,7 @@ public class OrderDetail {
     private String OrderMoney;//总价
     private String OrderType;//赠品标识
     private String OrderFree;//方案标识
-    private String OrderbyGoodID;// id  主键
+    private String OrderbyGoodID;// id  主键   //在30中是 第二个仓库id
     private String Node;//备注
     private String WareHouseSysId;//仓库id
     private String BusinessType;//订单类型

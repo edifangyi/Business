@@ -119,13 +119,33 @@ public class FYEtItemView extends LinearLayout {
     }
 
     public String getInputIsEmpty() {
+        String str = tvetInput.getText().toString();
 
-        if (TextUtils.isEmpty(tvetInput.getText().toString())) {
+        if (TextUtils.isEmpty(str)) {
+
             return "0";
-        } else if (".".equals(tvetInput.getText().toString())){
-            return "0";
+
+        }
+//        else if (str.length() > 1 && !"0.00".equals(str) && !".".equals(str) && "0".equals(str.substring(0, 1))) {
+//
+//
+//            return "0." + str.substring(1, str.length());
+//
+//
+//        }
+        else if (".".equals(str.substring(0, 1))) {
+
+
+            return "0" + str;
+
+        } else if (".".equals(str.substring(str.length() - 1, str.length()))) {
+
+
+            return str.substring(0, str.length() - 1);
+
         } else {
-            return tvetInput.getText().toString();
+
+            return str;
         }
     }
 

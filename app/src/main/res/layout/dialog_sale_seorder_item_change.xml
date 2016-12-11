@@ -4,16 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.fangyi.businessthrough.view.FYBtnRadioView
+
+    <com.fangyi.businessthrough.view.FYEtItemView
         android:id="@+id/fy_num"
-        style="@style/FYViewStyle" />
-
-    <com.fangyi.businessthrough.view.FYBtnRadioView
-        android:id="@+id/fy_NoPrice"
-        style="@style/FYViewStyle" />
-
-    <com.fangyi.businessthrough.view.FYBtnRadioView
-        android:id="@+id/fy_NoSumMoney"
         style="@style/FYViewStyle" />
 
     <com.fangyi.businessthrough.view.FYEtItemView

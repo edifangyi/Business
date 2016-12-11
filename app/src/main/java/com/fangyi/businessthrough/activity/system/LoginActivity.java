@@ -177,21 +177,24 @@ public class LoginActivity extends BaseActivity {
         );
         builder.setCancelable(false);
         builder.setView(etService, 60, 0, 60, 0);
-        builder.setPositiveButton(
-                "确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        serviceAddress = etService.getText().toString();
-                       PrefUtils.setString(FYApplication.getContext(), "is_service_address", serviceAddress);//保存服务器地址到本地设置数据库中
+        builder.setPositiveButton("确定", null);
 
-                        if (TextUtils.isEmpty(serviceAddress)) {
-                            Toast.makeText(LoginActivity.this, "服务器地址不能为空", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                serviceAddress = etService.getText().toString();
+
+                if (TextUtils.isEmpty(serviceAddress)) {
+                    Toast.makeText(LoginActivity.this, "服务器地址不能为空", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-        );
 
-        builder.show();
+                PrefUtils.setString(FYApplication.getContext(), "is_service_address", serviceAddress);//保存服务器地址到本地设置数据库中
+                dialog.dismiss();
+            }
+        });
 
     }
 

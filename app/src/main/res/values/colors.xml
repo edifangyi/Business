@@ -20,6 +20,8 @@
     <color name="purple_pressed">#9F79EE</color>
 
 
+    <color name="grapbg">#C0c0c0</color>
+
     <!--字体颜色-->
     <color name="text_color_big">#333333</color>
     <color name="text_color_small">#999999</color>

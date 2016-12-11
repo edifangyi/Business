@@ -29,7 +29,8 @@ import com.fangyi.businessthrough.fragment.me.MeFragment;
 import com.fangyi.businessthrough.fragment.me.data.DeleteFragment;
 import com.fangyi.businessthrough.fragment.me.data.DownloadDataFragment;
 import com.fangyi.businessthrough.fragment.me.data.DownloadOrderFragment;
-import com.fangyi.businessthrough.fragment.me.data.UploadDataFragment;
+import com.fangyi.businessthrough.fragment.me.data.upload.UploadDataFragment;
+import com.fangyi.businessthrough.fragment.me.data.upload.imp.UploadItemFragment;
 import com.fangyi.businessthrough.fragment.set.SetFragment;
 
 import java.util.ArrayList;
@@ -135,7 +136,7 @@ public class FragmentFactory {
     }
 
     /**
-     * 销售订单查询
+     * 采购订单查询
      *
      * @param position
      * @return
@@ -154,6 +155,29 @@ public class FragmentFactory {
                 break;
             case 3://销售退货单
                 fragment = Filter22Fragment.getInstance("7");
+                break;
+        }
+        return fragment;
+    }
+
+    /**
+     * 上传
+     *
+     * @param position
+     * @return
+     */
+    public static Fragment createForUploadTab(int position) {
+        Fragment fragment = null;
+        switch (position) {
+            case 0://销售
+                fragment = UploadItemFragment.getInstance("0");
+                break;
+            case 1://采购
+                fragment = UploadItemFragment.getInstance("1");
+                break;
+            case 2://仓库
+
+                fragment = UploadItemFragment.getInstance("2");
                 break;
         }
         return fragment;

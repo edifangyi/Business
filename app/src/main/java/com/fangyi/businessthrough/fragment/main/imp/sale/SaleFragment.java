@@ -8,11 +8,11 @@ import android.widget.Toast;
 import com.fangyi.businessthrough.R;
 import com.fangyi.businessthrough.adapter.system.GridViewAdapter;
 import com.fangyi.businessthrough.application.FYApplication;
-import com.fangyi.businessthrough.bean.system.DeviceUI;
 import com.fangyi.businessthrough.base.BaseFragment;
+import com.fangyi.businessthrough.bean.system.DeviceUI;
+import com.fangyi.businessthrough.factory.StartUtils;
 import com.fangyi.businessthrough.utils.system.CommonUtils;
 import com.fangyi.businessthrough.utils.system.PrefUtils;
-import com.fangyi.businessthrough.factory.StartUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -57,6 +57,7 @@ public class SaleFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void getLoginUserUI(DeviceUI deviceUI) {
+
         ui = deviceUI;
     }
 

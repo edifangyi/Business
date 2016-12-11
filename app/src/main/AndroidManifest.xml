@@ -101,15 +101,32 @@
             android:name=".activity.system.SearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+
         <activity
-            android:name=".activity.business.AddGoodsActivity"
+            android:name=".activity.business.AddGoods_1_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
         </activity>
+
+        <activity
+            android:name=".activity.business.AddGoods_2_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".activity.business.AddGoods_3_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".activity.business.AddGoods_4_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <activity
             android:name=".activity.business.AddGoodsPromotionActivity"
@@ -136,10 +153,6 @@
             android:name=".activity.business.SumShowActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-        <activity
-            android:name=".activity.business.AddGoodsPurchaseActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
 
 

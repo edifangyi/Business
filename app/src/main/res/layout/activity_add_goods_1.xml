@@ -84,7 +84,11 @@
                     style="@style/FYViewStyle" />
                 <!--仓库-->
                 <com.fangyi.businessthrough.view.FYBtnRadioView
-                    android:id="@+id/fy_FDCStock"
+                    android:id="@+id/fy_FDCStock_1"
+                    style="@style/FYViewStyle" />
+                <!--仓库-->
+                <com.fangyi.businessthrough.view.FYBtnRadioView
+                    android:id="@+id/fy_FDCStock_2"
                     style="@style/FYViewStyle" />
                 <!--数量-->
                 <com.fangyi.businessthrough.view.FYEtItemView
@@ -128,30 +132,6 @@
 
     </ScrollView>
 
-    <!--<EditText-->
-        <!--android:id="@+id/recharge_money_et"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:background="@color/white"-->
-        <!--android:hint="请输入金额"-->
-        <!--android:inputType="numberDecimal"-->
-        <!--android:paddingLeft="15dp"-->
-        <!--android:paddingRight="15dp"-->
-        <!--android:textSize="18dp" />-->
-
-
-    <!--<android.inputmethodservice.KeyboardView-->
-        <!--android:id="@+id/keyboard_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="#F4F4F4"-->
-        <!--android:focusable="true"-->
-        <!--android:focusableInTouchMode="true"-->
-        <!--android:keyBackground="@drawable/shuzi_selector"-->
-        <!--android:keyTextColor="#000000"-->
-        <!--android:keyTextSize="20sp"-->
-        <!--android:shadowColor="#FFFFFF" />-->
 
 
 </LinearLayout>

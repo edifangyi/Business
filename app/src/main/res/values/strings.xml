@@ -47,4 +47,10 @@
     </array>
 
 
+    <array name="upload_ietm">
+        <item>销售单据</item>
+        <item>采购单据</item>
+        <item>仓库单据</item>
+    </array>
+
 </resources>

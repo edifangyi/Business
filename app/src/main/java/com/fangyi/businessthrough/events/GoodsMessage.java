@@ -13,7 +13,7 @@ public class GoodsMessage {
     public String uom;
     public String unitID;
     public String unitGroupID;
-    public double price;
+    public String price;
 
     public String getConversion() {
         return conversion;
@@ -79,11 +79,11 @@ public class GoodsMessage {
         this.standard = standard;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

@@ -13,6 +13,7 @@ import com.fangyi.businessthrough.bean.business.PurchaseOrderMain;
 import com.fangyi.businessthrough.bean.business.SEOrderMain;
 import com.fangyi.businessthrough.dao.DBBusiness;
 import com.fangyi.businessthrough.events.AddGoodsMessage;
+import com.fangyi.businessthrough.events.AddGoodsMessage30;
 import com.fangyi.businessthrough.events.AddGoodsPromotion;
 import com.fangyi.businessthrough.utils.business.CalculationUtils;
 import com.socks.library.KLog;
@@ -447,7 +448,7 @@ public class Data {
                 addGoodsPromotion.setGoodsName(orderGood.goodsName);
                 addGoodsPromotion.setGoodsNumber(orderGood.orderNum);
                 addGoodsPromotion.setGoodsPrice(orderGood.orderPrice);
-                addGoodsPromotion.setGoodsSumPrice(String.valueOf(CalculationUtils.muldd(Double.parseDouble(orderGood.orderPrice), Double.parseDouble(orderGood.orderNum))));
+                addGoodsPromotion.setGoodsSumPrice(String.valueOf(CalculationUtils.mul(Double.parseDouble(orderGood.orderPrice), Double.parseDouble(orderGood.orderNum))));
                 addGoodsPromotion.setGoodsUnit(orderGood.unit);
                 addGoodsPromotion.setGoodsUnitID(orderGood.unitID);
                 addGoodsPromotion.setGoodsType(orderGood.goodsType);
@@ -581,7 +582,7 @@ public class Data {
                 addGoodsPromotion.setGoodsName(orderGood.goodsName);
                 addGoodsPromotion.setGoodsNumber(orderGood.orderNum);
                 addGoodsPromotion.setGoodsPrice(orderGood.orderPrice);
-                addGoodsPromotion.setGoodsSumPrice(String.valueOf(CalculationUtils.muldd(Double.parseDouble(orderGood.orderPrice), Double.parseDouble(orderGood.orderNum))));
+                addGoodsPromotion.setGoodsSumPrice(String.valueOf(CalculationUtils.mul(Double.parseDouble(orderGood.orderPrice), Double.parseDouble(orderGood.orderNum))));
                 addGoodsPromotion.setGoodsUnit(orderGood.unit);
                 addGoodsPromotion.setGoodsUnitID(orderGood.unitID);
                 addGoodsPromotion.setGoodsType(orderGood.goodsType);
@@ -921,8 +922,7 @@ public class Data {
 
     /**
      * 仓库调拨单
-     *
-     * @param ID
+     *  @param ID
      * @param orderDate
      * @param mapWareHouse
      * @param wareHouseName_1
@@ -940,7 +940,7 @@ public class Data {
      * @param printNum
      * @param goodsInfos
      */
-    public static void saveStockOrder(String ID, String orderDate, Map<String, String> mapWareHouse, String wareHouseName_1, String wareHouseName_2, Map<String, String> mapRequester, String emp, String FFManager, String FSManager, String userSysID, String saveTime, String isUpLoad, String businessType, String FUpdateType, String FDelType, String printNum, List<AddGoodsMessage> goodsInfos) {
+    public static void saveStockOrder(String ID, String orderDate, Map<String, String> mapWareHouse, String wareHouseName_1, String wareHouseName_2, Map<String, String> mapRequester, String emp, String FFManager, String FSManager, String userSysID, String saveTime, String isUpLoad, String businessType, String FUpdateType, String FDelType, String printNum, List<AddGoodsMessage30> goodsInfos) {
 
 
         OrderMain orderMain = new OrderMain();
@@ -1004,7 +1004,7 @@ public class Data {
 
         if (goodsInfos != null && goodsInfos.size() != 0) {
 
-            for (AddGoodsMessage goodsInfo : goodsInfos) {
+            for (AddGoodsMessage30 goodsInfo : goodsInfos) {
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.setID(ID); //S+日期+业务编号+流水号
                 orderDetail.setGoodsSysID(goodsInfo.getGoodsSysID());//商品id  goods 里sysid
@@ -1022,15 +1022,23 @@ public class Data {
                 orderDetail.setUnitID(goodsInfo.getUnitID());//单位ID
 
                 orderDetail.setOrderFree("");//方案标识
-                orderDetail.setOrderbyGoodID("");//id  主键
                 orderDetail.setNode("");//备注
                 orderDetail.setListGoodsType("");
 
-                if (TextUtils.isEmpty(goodsInfo.wareHouseSysId)) {
+                if (TextUtils.isEmpty(goodsInfo.wareHouseSysId1)) {
                     orderDetail.setWareHouseSysId("");
                 } else {
-                    orderDetail.setWareHouseSysId(goodsInfo.wareHouseSysId);
+                    orderDetail.setWareHouseSysId(goodsInfo.wareHouseSysId1);
                 }
+
+                if (TextUtils.isEmpty(goodsInfo.wareHouseSysId2)) {
+                    orderDetail.setOrderbyGoodID("");
+                } else {
+                    orderDetail.setOrderbyGoodID(goodsInfo.wareHouseSysId2);
+                }
+
+
+
                 orderDetail.setBusinessType(businessType);//订单类型
                 KLog.e("====$$$$$===" + orderDetail.toString());
                 orderDetailArrayList.add(orderDetail);

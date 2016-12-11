@@ -20,28 +20,29 @@ import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.fangyi.businessthrough.R;
-import com.fangyi.businessthrough.activity.business.AddGoodsActivity;
+import com.fangyi.businessthrough.activity.business.AddGoods_1_Activity;
+import com.fangyi.businessthrough.activity.business.AddGoods_3_Activity;
 import com.fangyi.businessthrough.activity.system.SearchActivity;
 import com.fangyi.businessthrough.adapter.business.MenuAddGoodsAdapter;
 import com.fangyi.businessthrough.adapter.business.MenuAddPromotionAdapter;
 import com.fangyi.businessthrough.base.BaseFragment;
 import com.fangyi.businessthrough.bean.business.PrintOrderMain;
 import com.fangyi.businessthrough.bean.system.FEntry_29_Set;
-import com.fangyi.businessthrough.parameter.SystemFieldValues;
 import com.fangyi.businessthrough.bean.system.User;
 import com.fangyi.businessthrough.bean.system.Users;
+import com.fangyi.businessthrough.bluetoothprint.PrintDataService;
+import com.fangyi.businessthrough.bluetoothprint.PrintUtil;
 import com.fangyi.businessthrough.dao.DBBusiness;
 import com.fangyi.businessthrough.dao.DBManager;
 import com.fangyi.businessthrough.data.Data;
 import com.fangyi.businessthrough.events.AddGoodsMessage;
 import com.fangyi.businessthrough.events.AddGoodsPromotion;
-import com.fangyi.businessthrough.utils.system.RebootActivity;
 import com.fangyi.businessthrough.http.NetConnectionUtil;
 import com.fangyi.businessthrough.http.WebUploadService;
+import com.fangyi.businessthrough.parameter.SystemFieldValues;
 import com.fangyi.businessthrough.utils.system.CommonUtils;
 import com.fangyi.businessthrough.utils.system.PrefUtils;
-import com.fangyi.businessthrough.bluetoothprint.PrintDataService;
-import com.fangyi.businessthrough.bluetoothprint.PrintUtil;
+import com.fangyi.businessthrough.utils.system.RebootActivity;
 import com.fangyi.businessthrough.utils.system.SerializableMap;
 import com.fangyi.businessthrough.view.FYBtnRadioView;
 import com.fangyi.businessthrough.view.FYEtItemView;
@@ -69,13 +70,13 @@ import static com.fangyi.businessthrough.application.FYApplication.ADD_PROMOTION
 import static com.fangyi.businessthrough.utils.business.CalculationUtils.add;
 import static com.fangyi.businessthrough.utils.business.CalculationUtils.add2;
 import static com.fangyi.businessthrough.utils.business.CalculationUtils.sub;
-import static com.fangyi.businessthrough.utils.system.CommonUtils.getColor;
 import static com.fangyi.businessthrough.utils.business.DateUtil.getStrToDate;
 import static com.fangyi.businessthrough.utils.business.DateUtil.getTime;
 import static com.fangyi.businessthrough.utils.business.DateUtil.getTimeYYYY_MM_DD_HH_MM_SS;
 import static com.fangyi.businessthrough.utils.business.StrFormatUtils.AmountShow;
 import static com.fangyi.businessthrough.utils.business.StrFormatUtils.AmountShowBug;
 import static com.fangyi.businessthrough.utils.business.StrFormatUtils.getStringsFormat;
+import static com.fangyi.businessthrough.utils.system.CommonUtils.getColor;
 
 
 /**
@@ -830,16 +831,12 @@ public class FEntry29Fragment extends BaseFragment {
      */
     private void startAddDonation() {
         if (fyFCustNameID != null) {
-            Intent intent = new Intent(getActivity(), AddGoodsActivity.class);
-            intent.putExtra("addType", "0");
+            Intent intent = new Intent(getActivity(), AddGoods_3_Activity.class);
+
             intent.putExtra("businessType", businessType);//businessType
-            intent.putExtra("fChooseAmount", fEntry29Set.fChooseAmount);//允许修改单价金额
             intent.putExtra("fDCStockD", fEntry29Set.fDCStockD);//仓库
             intent.putExtra("fStockPosition", fEntry29Set.fStockPosition);//仓库 在添加页面
-            intent.putExtra("fPlanPro", fEntry29Set.fPlanPro);//启用搭赠方案
-            intent.putExtra("userSysID", LoginUsers.userSysID);//传登陆用户ID
             intent.putExtra("kISID", LoginUsers.kISID);//传登陆用户KISID
-            intent.putExtra("fyFCustNameID", fyFCustNameID);//传登陆用户KISID
 
             startActivityForResult(intent, ADD_GOODS_REQ_CODE);
         } else {
@@ -852,7 +849,7 @@ public class FEntry29Fragment extends BaseFragment {
      */
     private void startAddGoods() {
         if (fyFCustNameID != null) {
-            Intent intent = new Intent(getActivity(), AddGoodsActivity.class);
+            Intent intent = new Intent(getActivity(), AddGoods_1_Activity.class);
             intent.putExtra("addType", "1");
             intent.putExtra("businessType", businessType);//businessType
             intent.putExtra("fChooseAmount", fEntry29Set.fChooseAmount);//允许修改单价金额

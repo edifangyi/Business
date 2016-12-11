@@ -501,7 +501,7 @@ public class AddGoodsPromotionActivity extends BaseActivity {
 
                 if (compare(sumNumber, Double.parseDouble(fProQy)) > -1) {
                     tvNumber.setBackground(CommonUtils.getDrawable(R.drawable.shap_btn_bg_green));
-                    promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fProQy)));
+                    promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fProQy)));
                     sumNumberCondition = true;
                     sumPriceCondition = false;
                 } else {
@@ -526,7 +526,7 @@ public class AddGoodsPromotionActivity extends BaseActivity {
             } else if ("1".equals(fSuit) && "1".equals(fMultiple)) {//有套装 有倍增
                 if (compare(sumNumber, Double.parseDouble(fSumQty)) > -1) {
                     tvNumber.setBackground(CommonUtils.getDrawable(R.drawable.shap_btn_bg_green));
-                    promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fSumQty)));
+                    promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fSumQty)));
                     sumNumberCondition = true;
                     sumPriceCondition = false;
                 } else {
@@ -558,7 +558,7 @@ public class AddGoodsPromotionActivity extends BaseActivity {
 
                 if (compare(sumPrice, Double.parseDouble(fProAmount)) > -1) {
                     tvSum.setBackground(CommonUtils.getDrawable(R.drawable.shap_btn_bg_green));
-                    promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fProAmount)));
+                    promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fProAmount)));
                     sumNumberCondition = false;
                     sumPriceCondition = true;
                 } else {
@@ -586,7 +586,7 @@ public class AddGoodsPromotionActivity extends BaseActivity {
 
                 if (compare(sumPrice, Double.parseDouble(fSumAmount)) > -1) {
                     tvSum.setBackground(CommonUtils.getDrawable(R.drawable.shap_btn_bg_green));
-                    promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fSumAmount)));
+                    promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fSumAmount)));
                     sumNumberCondition = false;
                     sumPriceCondition = true;
                 } else {
@@ -619,11 +619,11 @@ public class AddGoodsPromotionActivity extends BaseActivity {
                     setTvSynchronousChangeColor(CommonUtils.getDrawable(R.drawable.shap_btn_bg_green), true, true);
 
                     if (compare(sumNumber, Double.parseDouble(fProQy)) > -1) {
-                        promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fProQy)));
+                        promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fProQy)));
                     }
 
                     if (compare(sumPrice, Double.parseDouble(fProAmount)) > -1) {
-                        promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fProAmount)));
+                        promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fProAmount)));
                     }
 
                 } else {
@@ -645,9 +645,9 @@ public class AddGoodsPromotionActivity extends BaseActivity {
 
                     setTvSynchronousChangeColor(CommonUtils.getDrawable(R.drawable.shap_btn_bg_green), true, true);
                     if (compare(sumNumber, Double.parseDouble(fSumQty)) > -1) {
-                        promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fSumQty)));
+                        promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fSumQty)));
                     } else {
-                        promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fSumAmount)));
+                        promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fSumAmount)));
                     }
 
                 } else {
@@ -672,9 +672,9 @@ public class AddGoodsPromotionActivity extends BaseActivity {
                     setTvSynchronousChangeColor(CommonUtils.getDrawable(R.drawable.shap_btn_bg_green), true, true);
 
                     if (compare(div2(sumNumber, Double.parseDouble(fProQy)), div2(sumPrice, Double.parseDouble(fProAmount))) > -1) {
-                        promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fProAmount)));
+                        promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fProAmount)));
                     } else {
-                        promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fProQy)));
+                        promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fProQy)));
                     }
 
                 } else {
@@ -697,9 +697,9 @@ public class AddGoodsPromotionActivity extends BaseActivity {
                     setTvSynchronousChangeColor(CommonUtils.getDrawable(R.drawable.shap_btn_bg_green), true, true);
 
                     if (compare(div2(sumNumber, Double.parseDouble(fSumQty)), div2(sumPrice, Double.parseDouble(fSumAmount))) > -1) {
-                        promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fSumAmount)));
+                        promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumPrice, Double.parseDouble(fSumAmount)));
                     } else {
-                        promotionCount = CalculationUtils.muldd(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fSumQty)));
+                        promotionCount = CalculationUtils.mul(Double.parseDouble(fProQyPromotionCount), div2(sumNumber, Double.parseDouble(fSumQty)));
                     }
                 } else {
                     setTvSynchronousChangeColor(CommonUtils.getDrawable(R.drawable.shap_btn_bg_gray), false, false);

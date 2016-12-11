@@ -255,21 +255,24 @@ public class SetFragment extends BaseFragment {
                 );
                 builder.setCancelable(false);
                 builder.setView(etService, 60, 0, 60, 0);
-                builder.setPositiveButton(
-                        "确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String etServiceAdd = etService.getText().toString();
+                builder.setPositiveButton( "确定", null);
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                                PrefUtils.setString(FYApplication.getContext(), "is_service_address", etServiceAdd);//保存服务器地址到本地设置数据库中
-                                scvChangeServiceAddress.setDescription(etServiceAdd);
-                                if (TextUtils.isEmpty(etServiceAdd)) {
-                                    Toast.makeText(getActivity(), "服务器地址不能为空", Toast.LENGTH_SHORT).show();
-                                }
-                            }
+                        String etServiceAdd = etService.getText().toString();
+                        if (TextUtils.isEmpty(etServiceAdd)) {
+                            Toast.makeText(getActivity(), "服务器地址不能为空", Toast.LENGTH_SHORT).show();
+                            return;
                         }
-                );
-                builder.show();
+
+                        PrefUtils.setString(FYApplication.getContext(), "is_service_address", etServiceAdd);//保存服务器地址到本地设置数据库中
+                        scvChangeServiceAddress.setDescription(etServiceAdd);
+                        dialog.dismiss();
+                    }
+                });
             }
         });
     }

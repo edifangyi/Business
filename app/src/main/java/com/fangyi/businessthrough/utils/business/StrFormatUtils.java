@@ -44,6 +44,7 @@ public class StrFormatUtils {
         return Double.parseDouble(sum.replace(",", ""));
     }
 
+
     public static String AmountShowPolishing(String sum) {
 
 

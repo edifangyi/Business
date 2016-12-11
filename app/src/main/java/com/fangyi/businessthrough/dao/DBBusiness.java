@@ -175,6 +175,36 @@ public class DBBusiness {
     /**
      * 根据GoodsSysID获取当个商品信息
      */
+    public List<Map<String, String>> getBaseGoodsMessageIncludePrice(String goodsSysID) {
+        List<Map<String, String>> list = new ArrayList<>();
+        String sql = "SELECT g.TradePrice, g.GoodsSysID, g.GoodsName, g.Barcode, g.Standard, u.Conversion,\n" +
+                "u.Uom, u.UnitID, u.UnitGroupID, u.Ubase FROM Goods g, UnitGroup u\n" +
+                "WHERE g.UnitGroupID = u.UnitGroupID\n" +
+                "AND g.GoodsSysID = '" + goodsSysID + "'";
+
+        Cursor custor = db.rawQuery(sql, null);
+        int cols_len = custor.getColumnCount();
+        if (custor != null && custor.getCount() > 0) {
+            while (custor.moveToNext()) {
+                Map<String, String> goodsMap = new HashMap<>();
+                for (int i = 0; i < cols_len; i++) {
+
+                    String cols_name = custor.getColumnName(i);
+                    String cols_values = custor.getString(custor.getColumnIndex(cols_name));
+                    if (cols_values == null) {
+                        cols_values = "";
+                    }
+                    goodsMap.put(cols_name, cols_values);
+                }
+                list.add(goodsMap);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 根据GoodsSysID获取当个商品信息
+     */
     public List<Map<String, String>> getBaseGoodsMessage(String goodsSysID) {
         List<Map<String, String>> list = new ArrayList<>();
         String sql = "SELECT g.GoodsSysID, g.GoodsName, g.Barcode, g.Standard, u.Conversion,\n" +
@@ -202,7 +232,17 @@ public class DBBusiness {
         return list;
     }
 
-
+    /**
+     * 价格政策
+     *
+     * @param changeNum
+     * @param fyFCustNameID
+     * @param goodsSysID
+     * @param kISID
+     * @param unitID
+     * @param conversion
+     * @return
+     */
     public String getBaseGoodsMessagePrice(String changeNum, String fyFCustNameID, String goodsSysID, String kISID, String unitID, String conversion) {
 
 //        KLog.e("====" + changeNum + "====" + fyFCustNameID + "====" + goodsSysID + "====" + kISID + "====" + unitID + "====" + conversion);
@@ -546,6 +586,130 @@ public class DBBusiness {
     }
 
     /**
+     * 读取单据集合
+     *
+     * @return
+     */
+    public List<PrintOrderMain> getOrderInfo(String businessType) {
+        db.beginTransaction();
+
+        PrintOrderMain orderMain = null;
+        String sql = "SELECT\n" +
+                "\to.ID,o.OrderDate,o.AllMoney,o.SaveTime,o.IsUpLoad,o.Message,o.CustomerSySID,c.CustomerName,c.address,c.Tel,o.UserSysID,us.UserSysID,\n" +
+                "\to.DeptID,p.ParameterName,o.WareHouseSysID,o.WareHouseName,o.BusinessType,o.FSaleType,o.FAreaPS,o.DeliveryDate,o.FSource\n" +
+                "FROM\n" +
+                "\tOrderMain o,Customer c,Users us,Parameter p\n" +
+                "WHERE\n" +
+                "us.KISID = o.UserSysID\n" +
+                "AND p.ParameterID = o.DeptID\n" +
+                "AND c.CustomerSySID = o.CustomerSySID\n" +
+                "AND BusinessType = '" + businessType + "'\n" +
+                "AND o.IsUpLoad = '0'";
+
+        List<PrintOrderMain> lists = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            orderMain = new PrintOrderMain();
+            while (cursor.moveToNext()) {
+                orderMain.id = cursor.getString(0);
+                orderMain.orderDate = cursor.getString(1);
+                orderMain.allMoney = cursor.getString(2);
+                orderMain.saveTime = cursor.getString(3);
+                orderMain.isUpLoad = cursor.getString(4);
+                orderMain.message = cursor.getString(5);
+
+                orderMain.customerSysId = cursor.getString(6);
+                orderMain.customerName = cursor.getString(7);
+                orderMain.customerAddress = cursor.getString(8);
+                orderMain.customerTel = cursor.getString(9);
+
+                orderMain.userSysId = cursor.getString(10);
+                orderMain.userId = cursor.getString(11);
+
+                orderMain.deptId = cursor.getString(12);
+                orderMain.deptName = cursor.getString(13);
+
+                orderMain.wareHouseSysId = cursor.getString(14);
+                orderMain.wareHouseName = cursor.getString(15);
+
+                orderMain.businessType = cursor.getString(16);
+                orderMain.saleType = cursor.getString(17);
+                orderMain.areaPS = cursor.getString(18);
+                orderMain.deliveryDate = cursor.getString(19);
+                orderMain.source = cursor.getString(20);
+
+                List<Goods> orderGoods = new ArrayList<>();
+                List<Goods> presentGoods = new ArrayList<>();
+                String sqls = "SELECT g.goodsSysId,goodsId,goodsName,barCode,helpId,o.standard,conversion,orderNum,orderPrice,OrderType,OrderMoney,orderByGoodId," +
+                        "(select goodsName from goods sg where sg.goodsSysId=o.orderByGoodId) as  saledGoodsName ," +
+                        "(select orderNum from orderDetail od where od.goodsSysId=o.orderByGoodId) as  saledGoodsNum,wareHouseSysId,(select wareHouseName from wareHouse wh where wh.wareHouseSysId=o.wareHouseSysId) as wareHouseName,g.unit,o.orderFree,o.ListGoodsType,o.unitID  " +
+                        "FROM Goods g,orderDetail o " +
+                        "where g.goodsSysId=o.goodsSysId  and id='" + orderMain.id + "' and " +
+                        "businessType = '" + businessType + "'";
+
+                Cursor cursors = db.rawQuery(sqls, null);
+
+                if (cursors != null && cursors.getCount() > 0) {
+                    while (cursors.moveToNext()) {
+                        Goods goods = new Goods();
+                        goods.goodsSysID = cursors.getString(0);
+                        goods.goodsID = cursors.getString(1);
+                        goods.goodsName = cursors.getString(2);
+                        goods.barcode = cursors.getString(3);
+                        goods.helpID = cursors.getString(4);
+                        goods.unit = cursors.getString(5);
+                        goods.conversion = cursors.getString(6);
+                        goods.orderNum = cursors.getString(7);
+                        goods.orderPrice = cursors.getString(8);
+                        goods.goodsType = cursors.getString(9);
+                        goods.orderCounter = cursors.getString(10);
+                        goods.saledGoodsSysId = cursors.getString(11);
+                        goods.saledGoodsName = cursors.getString(12);
+                        goods.saleGoodsNum = cursors.getString(13);
+                        goods.wareHouseSysId = cursors.getString(14);
+                        goods.wareHouseName = cursors.getString(15);
+                        goods.unit = cursors.getString(16);
+                        goods.fName = cursors.getString(17);
+                        goods.listGoodsType = cursors.getString(18);
+                        goods.unitID = cursors.getString(19);
+
+                        if ("1".equals(cursors.getString(9))) {
+                            orderGoods.add(goods);
+                        } else
+                            presentGoods.add(goods);
+                    }
+                }
+
+
+                KLog.e("======$$$$$$$=======" + orderGoods.toString());
+                KLog.e("======%%%%%%%=======" + presentGoods.toString());
+
+                if (!orderGoods.equals(null)) {
+                    orderMain.orderGoods = orderGoods;
+                }
+
+                if (!presentGoods.equals(null)) {
+                    orderMain.presentGoods = presentGoods;
+                }
+
+
+                lists.add(orderMain);
+            }
+        }
+
+
+
+
+
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+
+        return lists;
+    }
+
+    /**
      * 保存数据
      *
      * @param orderMain
@@ -663,6 +827,14 @@ public class DBBusiness {
     public void upDateOrderIsUpload(String orderId, String businessType) {
         KLog.e("======" + orderId + businessType);
         db.execSQL("UPDATE OrderMain SET IsUpLoad = '1' WHERE ID = ? AND businessType = ?", new String[]{orderId, businessType});
+    }
+
+    /**
+     * 更改订单上传状态
+     */
+    public void upDateOrderIsUpload(String businessType) {
+        KLog.e("======" + businessType);
+        db.execSQL("UPDATE OrderMain SET IsUpLoad = '1' WHERE ID = ? AND businessType = ?", new String[]{businessType});
     }
 
     /**

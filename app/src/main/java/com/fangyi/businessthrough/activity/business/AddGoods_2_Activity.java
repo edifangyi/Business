@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.fangyi.businessthrough.activity.system.SearchActivity;
 import com.fangyi.businessthrough.base.BaseActivity;
 import com.fangyi.businessthrough.dao.DBBusiness;
 import com.fangyi.businessthrough.events.GoodsMessage;
+import com.fangyi.businessthrough.utils.business.CalculationUtils;
 import com.fangyi.businessthrough.utils.system.CommonUtils;
 import com.fangyi.businessthrough.view.FYBtnRadioView;
 import com.fangyi.businessthrough.view.FYEtItemView;
@@ -32,20 +34,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.fangyi.businessthrough.application.FYApplication.ADD_GOODS_REQ_CODE;
+import static com.fangyi.businessthrough.application.FYApplication.ADD_PROMOTION_REQ_CODE;
 import static com.fangyi.businessthrough.application.FYApplication.getContext;
-import static com.fangyi.businessthrough.utils.business.CalculationUtils.divAddGoods;
-import static com.fangyi.businessthrough.utils.business.CalculationUtils.mulss;
+import static com.fangyi.businessthrough.utils.business.CalculationUtils.div;
+import static com.fangyi.businessthrough.utils.business.CalculationUtils.mul;
 import static com.fangyi.businessthrough.utils.business.StrFormatUtils.AmountShow;
-import static com.fangyi.businessthrough.utils.business.StrFormatUtils.AmountShowPolishing;
+import static com.fangyi.businessthrough.utils.business.StrFormatUtils.AmountShowBug;
 import static com.fangyi.businessthrough.utils.business.StrFormatUtils.StringFilter;
 import static com.fangyi.businessthrough.utils.business.StrFormatUtils.getStringsFormat;
 
 
 /**
+ * 不带价格政策 添加商品 没有促销方案
  * Created by FANGYI on 2016/9/22.
  */
 
-public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnClickListener {
+public class AddGoods_2_Activity extends BaseActivity implements View.OnClickListener {
 
 
     @BindView(R.id.action_bar_back)
@@ -62,8 +66,6 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
     FYEtItemView fyGoodsNumber;
     @BindView(R.id.fy_Price)
     FYEtItemView fyPrice;
-    @BindView(R.id.fy_No_Price)
-    FYBtnRadioView fyNoPrice;
     @BindView(R.id.fy_SumMoney)
     FYEtItemView fySumMoney;
     @BindView(R.id.fy_Standard)
@@ -72,20 +74,13 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
     Button btnSaveAddGoods;
     @BindView(R.id.fy_FDCStock)
     FYBtnRadioView fyFDCStock;
-    @BindView(R.id.fy_No_SumMoney)
-    FYBtnRadioView fyNoSumMoney;
 
-
-
-    private String addType;
     private String businessType;
     private String fChooseAmount;//允许修改单价金额
     private String fDCStockD;//仓库
     private String fStockPosition;//仓库页面
-    private String fPlanPro;//启用搭赠方案
     private String userSysID;//用户登陆id
     private String kISID;//用户登陆id
-    private String fyFCustNameID;//客户ID
 
     private Map<String, String> mapWareHouse;//仓库
     private GoodsMessage goodsMessage;//所选商品信息
@@ -97,9 +92,8 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
 
     private List<Map<String, String>> aloneGoodsMessageList;
 
-    private String changeNum;
-    private String changePrice;
-    private String changeSum;
+    private String price;
+
 
     private String goodsSysID;
     private String goodsName;
@@ -110,6 +104,19 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
     private String unitID;
     private String unitGroupID;
     private String uBase;
+    private String tradePrice;
+
+    private String strGoodsNumber = "0";
+    private String strPrice = "0";
+    private String strSumMoney = "0";
+
+    private String key0 = "3";
+    private String key1 = "3";
+    private String key2 = "3";
+    private String changNumber;
+    private String changPrice;
+    private String changSumMoney;
+
 
 
     @Override
@@ -128,15 +135,12 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
     private void readingData() {
 
         //接受前文传过来的intent;赋值给search_code;
-        addType = this.getIntent().getStringExtra("addType");
         businessType = this.getIntent().getStringExtra("businessType");
         fChooseAmount = this.getIntent().getStringExtra("fChooseAmount");
         fDCStockD = this.getIntent().getStringExtra("fDCStockD");
         fStockPosition = this.getIntent().getStringExtra("fStockPosition");
-        fPlanPro = this.getIntent().getStringExtra("fPlanPro");
         userSysID = this.getIntent().getStringExtra("userSysID");
         kISID = this.getIntent().getStringExtra("kISID");
-        fyFCustNameID = this.getIntent().getStringExtra("fyFCustNameID");
 
         DBBusiness business = new DBBusiness(getContext());
         mapWareHouse = business.getWareHouse(kISID);
@@ -148,6 +152,8 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
      * 初始化控件
      */
     private void setinitItemView() {
+        tvTitle.setText("添加商品");
+
 
         fyGoodsName.setTitle("商品");
         fyGoodsName.setContent("必须填写");
@@ -157,6 +163,8 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
         fyBarcode.setHint("请输入条形码");
         fyBarcode.setInputTypeNumber();
         fyUom.setTitle("单位");
+
+        fyStandard.setTitle("规格");
 
         fyFDCStock.setTitle("仓库");
         fyFDCStock.setContent(mapWareHouse.get(fDCStockD));
@@ -168,42 +176,29 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
         fyGoodsNumber.setHint("请输入数量");
         fyGoodsNumber.setInputTypeNumber();
 
+        fyPrice.setTitle("单价");
+        fyPrice.setHint("请输入单价");
+        fyPrice.setInputTypeNumber();
 
-        tvTitle.setText("添加商品");
-
-
-        if ("1".equals(fChooseAmount)) {//可以改价格
-            fyPrice.setTitle("单价");
-            fyPrice.setHint("请输入单价");
-            fySumMoney.setTitle("金额");
-
-            fyPrice.setInputTypeNumber();
-            fySumMoney.setInputTypeNumber();
-
-            fyNoSumMoney.setVisibility(View.GONE);
-            fyNoPrice.setVisibility(View.GONE);
-        } else {
-            fyNoPrice.setTitle("单价");
-            fyNoSumMoney.setTitle("金额");
-            fySumMoney.setVisibility(View.GONE);
-            fyPrice.setVisibility(View.GONE);
-        }
+        fySumMoney.setTitle("金额");
+        fySumMoney.setHint("请输入金额");
+        fySumMoney.setInputTypeNumber();
 
 
-        fyStandard.setTitle("规格");
+        fyGoodsNumber.setInputType(InputType.TYPE_NULL);
+        fyPrice.setInputType(InputType.TYPE_NULL);
+        fySumMoney.setInputType(InputType.TYPE_NULL);
 
         if ("0".equals(businessType)) {
             fyGoodsName.setContentTextColor(CommonUtils.getColor(R.color.text_user_account));
             fyBarcode.setTextColor(CommonUtils.getColor(R.color.text_user_account));
-            fyBarcode.setHintColor(CommonUtils.getColor(R.color.text_user_account));
+//            fyBarcode.setHintColor(CommonUtils.getColor(R.color.text_user_account));
             fyStandard.setContentTextColor(CommonUtils.getColor(R.color.text_user_account));
             fyFDCStock.setContentTextColor(CommonUtils.getColor(R.color.text_user_account));
             fyUom.setContentTextColor(CommonUtils.getColor(R.color.text_user_account));
-
             fyGoodsNumber.setTextColor(CommonUtils.getColor(R.color.text_user_account));
-
             fyPrice.setTextColor(CommonUtils.getColor(R.color.text_user_account));
-            fyNoPrice.setContentTextColor(CommonUtils.getColor(R.color.text_user_account));
+            fySumMoney.setTextColor(CommonUtils.getColor(R.color.text_user_account));
         }
 
 
@@ -237,16 +232,21 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String editable = fyGoodsNumber.getInputIsEmpty();
-                String str = StringFilter(editable.toString());
-                if (!editable.equals(str)) {
-                    fyGoodsNumber.setText(str);
-                    fyGoodsNumber.setSelection(str.length()); //光标置后
+
+                if (!"0".equals(key0)) {
+                    return;
                 }
 
-
-                KLog.e("=111111===" + str);
-                calculateSum("0", str);
+                String editable = fyGoodsNumber.getInputIsEmpty();
+                strGoodsNumber = StringFilter(editable.toString());
+//                KLog.e("===AAA====" + editable);
+//                KLog.e("===BBB====" + str);
+                if (!editable.equals(strGoodsNumber)) {
+                    fyGoodsNumber.setText(strGoodsNumber);
+                    fyGoodsNumber.setSelection(strGoodsNumber.length()); //光标置后
+                }
+                KLog.e("=111111===" + strGoodsNumber);
+                calculateSum("0", strGoodsNumber);
 
             }
 
@@ -265,15 +265,19 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String editable = fyPrice.getInputIsEmpty();
-                String str = StringFilter(editable.toString());
-                if (!editable.equals(str)) {
-                    fyPrice.setText(str);
-                    fyPrice.setSelection(str.length()); //光标置后
-                }
 
-                KLog.e("=222222===" + str);
-                calculateSum("1", str);
+
+                String editable = fyPrice.getInputIsEmpty();
+                strPrice = StringFilter(editable.toString());
+                if (!"1".equals(key1)) {
+                    return;
+                }
+                if (!editable.equals(strPrice)) {
+                    fyPrice.setText(strPrice);
+                    fyPrice.setSelection(strPrice.length()); //光标置后
+                }
+                KLog.e("=222222===" + strPrice);
+                calculateSum("1", strPrice);
 
             }
 
@@ -292,24 +296,31 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+
+//                if (!"".equals(s.toString())) {
                 String editable = fySumMoney.getInputIsEmpty();
-                String str = StringFilter(editable.toString());
-                if (!editable.equals(str)) {
-                    fySumMoney.setText(str);
-                    fySumMoney.setSelection(str.length()); //光标置后
+                strSumMoney = StringFilter(editable.toString());
+
+                if (!"2".equals(key2)) {
+                    return;
+                }
+                if (!editable.equals(strSumMoney)) {
+
+                    fySumMoney.setText(strSumMoney);
+                    fySumMoney.setSelection(strSumMoney.length()); //光标置后
                 }
 
-                KLog.e("=3333333===" + str);
-
-                calculateSum("2", str);
-
+                KLog.e("=3333333===" + strSumMoney);
+                calculateSum("2", strSumMoney);
             }
+//            }
 
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
+
 
     }
 
@@ -323,142 +334,85 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
 
     private void calculateSum(String judge, String str) {
 
-        changePrice = fyPrice.getInputIsEmpty();
-        changeNum = fyGoodsNumber.getInputIsEmpty();
-        changeSum = fySumMoney.getInputIsEmpty();
 
-
-        KLog.e("==@@@11111===" + str);
-        KLog.e("==@@@22222===" + changePrice);
-        KLog.e("==@@@33333===" + changeNum);
-        KLog.e("==@@@44444===" + changeSum);
+        changNumber = fyGoodsNumber.getInput().toString();
+        changPrice = fyPrice.getInput().toString();
+        changSumMoney = fySumMoney.getInput().toString();
 
 
         if ("0".equals(judge)) {//数量
+            key0 = "0";
+            key1 = "3";
+            key2 = "3";
             if ("0".equals(str)) {
-                if ("0".equals(changePrice)) {
-                    fyPrice.setHint(AmountShow(0));
-                    fyNoPrice.setContent(AmountShow(0));
-                    fySumMoney.setHint(AmountShow(0));
-                    fyNoSumMoney.setContent(AmountShow(0));
-                } else {
-                    fyPrice.setHint(AmountShow(0));
-                    fyNoPrice.setContent(AmountShow(0));
-                    fySumMoney.setHint(AmountShow(0));
-                    fyNoSumMoney.setContent(AmountShow(0));
-                }
-
+                fyPrice.setText(AmountShow(Double.parseDouble(price)));
+                fySumMoney.setText("");
+                fySumMoney.setHint("请输入金额");
             } else {
-                if ("0".equals(changePrice)) {
-                    if ("0".equals(changeSum)) {
-                        fyPrice.setHint(AmountShow(0));
-                        fyNoPrice.setContent(AmountShow(0));
-                        fySumMoney.setHint(AmountShow(0));
-                        fyNoSumMoney.setContent(AmountShow(0));
-                    } else {
-                        fyPrice.setHint(AmountShow(divAddGoods(changeSum, str)));
-                        fyNoPrice.setContent(AmountShow(divAddGoods(changeSum, str)));
-                    }
 
+                if (TextUtils.isEmpty(changSumMoney)) {
+                    fyPrice.setText(AmountShow(Double.parseDouble(price)));
+                    fySumMoney.setHint(AmountShow(mul(str, strPrice)));
                 } else {
-
-                    if ("0".equals(changeSum)) {
-                        fySumMoney.setHint(AmountShow(mulss(str, changePrice)));
-                        fyNoSumMoney.setContent(AmountShow(mulss(str, changePrice)));
-                    } else {
-                        fyPrice.setText("");
-                        fyPrice.setHint(AmountShow(divAddGoods(changeSum, str)));
-                        fyNoPrice.setContent(AmountShow(divAddGoods(changeSum, str)));
-                    }
-
+                    KLog.e("strSumMoney===" + strSumMoney);
+                    KLog.e("strGoodsNumber===" + str);
+                    fyPrice.setText(AmountShow(div(strSumMoney, str, 2)));
                 }
+
             }
+
+            key0 = "0";
+            key1 = "1";
+            key2 = "2";
+
         }
 
         if ("1".equals(judge)) {//单价
-
+            key0 = "0";
+            key1 = "1";
+            key2 = "3";
             if ("0".equals(str)) {
-                if ("0".equals(changeNum)) {
-                    fyPrice.setHint(AmountShow(0));
-                    fyNoPrice.setContent(AmountShow(0));
-                    fySumMoney.setHint(AmountShow(0));
-                    fyNoSumMoney.setContent(AmountShow(0));
-                } else {
-                    fyPrice.setHint(AmountShow(0));
-                    fyNoPrice.setContent(AmountShow(0));
-                    fySumMoney.setHint(AmountShow(mulss(str, changeNum)));
-                    fyNoSumMoney.setContent(AmountShow(mulss(str, changeNum)));
-                }
+                fySumMoney.setText("");
+                fySumMoney.setHint("请输入金额");
+//                fyPrice.setText(AmountShow(Double.parseDouble(price)));
+//                fyPrice.setSelection(AmountShow(Double.parseDouble(price)).length()); //光标置后
 
             } else {
-                if ("0".equals(changeNum)) {
-                    fySumMoney.setHint(AmountShow(0));
-                    fyNoSumMoney.setContent(AmountShow(0));
-                } else {
+
+                if (TextUtils.isEmpty(changNumber)) {
                     fySumMoney.setText("");
-                    fySumMoney.setHint(AmountShow(mulss(changeNum, str)));
-                    fyNoSumMoney.setContent(AmountShow(mulss(changeNum, str)));
+                    fySumMoney.setHint("请输入金额");
+                } else {
+                    fySumMoney.setHint(AmountShow(mul(strGoodsNumber, str)));
                 }
             }
+
+            key0 = "0";
+            key1 = "1";
+            key2 = "2";
 
         }
 
         if ("2".equals(judge)) {//总金额
-
+            key0 = "0";
+            key1 = "3";
+            key2 = "2";
             if ("0".equals(str)) {
+                fyPrice.setText(AmountShow(Double.parseDouble(price)));
+                fySumMoney.setHint(AmountShow(mul(strGoodsNumber, price)));
 
-                if ("0".equals(changeNum)) {
-                    if ("0".equals(changePrice)) {
-                        fyPrice.setHint(AmountShow(0));
-                        fyNoPrice.setContent(AmountShow(0));
-                        fySumMoney.setHint(AmountShow(0));
-                        fyNoSumMoney.setContent(AmountShow(0));
-                    } else {
-                        fyPrice.setHint(AmountShow(0));
-                        fyNoPrice.setContent(AmountShow(0));
-                        fySumMoney.setHint(AmountShow(mulss(changePrice, changeNum)));
-                        fyNoSumMoney.setContent(AmountShow(mulss(changePrice, changeNum)));
-                    }
-
-                } else {
-
-                    if ("0".equals(changePrice)) {
-                        fyPrice.setText("");
-                        fyPrice.setHint(AmountShow(0));
-                        fyNoPrice.setContent(AmountShow(0));
-                        fySumMoney.setHint(AmountShow(0));
-                        fyNoSumMoney.setContent(AmountShow(0));
-                    } else {
-
-                        fySumMoney.setHint(AmountShow(mulss(changeNum, changePrice)));
-                        fyNoSumMoney.setContent(AmountShow(mulss(changeNum, changePrice)));
-                    }
-
-                }
             } else {
-                if ("0".equals(changeNum)) {
-                    if ("0".equals(changePrice)) {
-                        fyPrice.setHint(AmountShow(0));
-                        fyNoPrice.setContent(AmountShow(0));
-                    } else {
-                        fyPrice.setHint(AmountShow(0));
-                        fyNoPrice.setContent(AmountShow(0));
-                    }
 
+                if (TextUtils.isEmpty(changNumber)) {
+                    fyPrice.setText(AmountShow(Double.parseDouble(price)));
                 } else {
-
-                    if ("0".equals(changePrice)) {
-                        fyPrice.setText("");
-                        fyPrice.setHint(AmountShow(divAddGoods(str, changeNum)));
-                        fyNoPrice.setContent(AmountShow(divAddGoods(str, changeNum)));
-                    } else {
-                        fyPrice.setText("");
-                        fyPrice.setHint(AmountShow(divAddGoods(str, changeNum)));
-                        fyNoPrice.setContent(AmountShow(divAddGoods(str, changeNum)));
-                    }
-
+                    fyPrice.setText(AmountShow(div(str, strGoodsNumber, 2)));
                 }
             }
+
+            key0 = "0";
+            key1 = "1";
+            key2 = "2";
         }
     }
 
@@ -492,7 +446,7 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
 
         final String[] arrWareHouse = getStringsFormat(mapValuesList);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(AddGoodsPurchaseActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddGoods_2_Activity.this);
         builder.setTitle("仓库选择");
         builder.setSingleChoiceItems(arrWareHouse, intFDCStockNum, new DialogInterface.OnClickListener() {
             @Override
@@ -514,10 +468,12 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
      */
     private void setUom() {
 
+
         if (TextUtils.isEmpty(goodsSysID)) {
             Toast.makeText(this, "请选择商品", Toast.LENGTH_SHORT).show();
             return;
         }
+
 
         if (aloneGoodsMessageList.size() != 1) {
             uom = aloneGoodsMessageList.get(intUomNum).get("Uom");
@@ -530,6 +486,25 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
                 intUomNum = 0;
             }
         }
+
+        key0 = "0";
+        key1 = "3";
+        key2 = "3";
+
+        changNumber = fyGoodsNumber.getInput().toString();
+
+        price = String.valueOf(mul(tradePrice,conversion));
+
+        if (!TextUtils.isEmpty(changNumber)) {
+            fyPrice.setText(AmountShow(Double.parseDouble(price)));
+            fySumMoney.setText("");
+            fySumMoney.setHint(AmountShow(mul(strGoodsNumber, price)));
+        }
+
+        key0 = "0";
+        key1 = "1";
+        key2 = "2";
+
     }
 
 
@@ -537,11 +512,28 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
      * 获取商品信息
      */
     private void setGoodsName() {
-        Intent intent = new Intent(AddGoodsPurchaseActivity.this, SearchActivity.class);
+        Intent intent = new Intent(AddGoods_2_Activity.this, SearchActivity.class);
         intent.putExtra("searchType", ADD_GOODS_REQ_CODE);
         startActivityForResult(intent, ADD_GOODS_REQ_CODE);
     }
 
+    /**
+     * 打开促销品订单页
+     *
+     * @param bundle
+     */
+    private void setGoodsPromotion(Bundle bundle) {
+        Intent intent = new Intent(getApplication(), AddGoodsPromotionActivity.class);
+        intent.putExtra("goodsNameID", bundle.getString("sysid"));
+        intent.putExtra("userSysID", userSysID);
+        intent.putExtra("fChooseAmount", fChooseAmount);//允许修改单价金额
+        intent.putExtra("fDCStockD", fDCStockD);//仓库
+        intent.putExtra("fStockPosition", fStockPosition);//仓库 在添加页面
+        intent.putExtra("kISID", kISID);//传登陆用户KISID
+
+
+        startActivityForResult(intent, ADD_PROMOTION_REQ_CODE);
+    }
 
     /**
      * Activity数据回调
@@ -555,7 +547,6 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
         super.onActivityResult(requestCode, resultCode, data);
 
         final Bundle bundle = data.getExtras();
-
         //搜索商品返回的信息
         if (resultCode != -1) {
 
@@ -580,7 +571,7 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
         fyGoodsName.setContent(bundle.getString("name"));//商品名称
 
         //商品信息
-        aloneGoodsMessageList = business.getBaseGoodsMessage(bundle.getString("sysid"));
+        aloneGoodsMessageList = business.getBaseGoodsMessageIncludePrice(bundle.getString("sysid"));
 
         for (Map<String, String> aloneGoodsMessage : aloneGoodsMessageList) {
             if ("1".equals(aloneGoodsMessage.get("Ubase"))) {
@@ -593,8 +584,10 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
                 unitID = aloneGoodsMessage.get("UnitID");
                 unitGroupID = aloneGoodsMessage.get("UnitGroupID");
                 uBase = aloneGoodsMessage.get("Ubase");
+                tradePrice = String.valueOf(mul(aloneGoodsMessage.get("TradePrice"),conversion));
             }
         }
+
 
         goodsMessage = new GoodsMessage();
         goodsMessage.setGoodsSysID(goodsSysID);
@@ -607,17 +600,27 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
         goodsMessage.setUnitGroupID(unitGroupID);
 
 
+        fyGoodsNumber.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+        if ("1".equals(fChooseAmount)) {//可以改价格
+            fyPrice.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            fySumMoney.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        }
+
+
+        price = tradePrice;
+
         fyBarcode.setHint(barcode);
         fyStandard.setContent(standard);
         fyUom.setContent(uom);
-        fyGoodsNumber.setHint("请输入数量");
-        fyGoodsNumber.setText("");
-        fyPrice.setHint("请输入单价");
-        fyNoPrice.setContent(AmountShow(0));
-        fyPrice.setText("");
 
-        fySumMoney.setHint(AmountShow(0));
-        fyNoSumMoney.setContent(AmountShow(0));
+        fyGoodsNumber.setText("");
+        fyPrice.setText(AmountShow(Double.parseDouble(price)));
+        fySumMoney.setText("");
+
+        key0 = "0";
+        key1 = "1";
+        key2 = "2";
     }
 
 
@@ -636,8 +639,8 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
     private void setCallbackData() {
         Bundle bundle = new Bundle();
         bundle.putString("goodsSysID", goodsSysID);
-        setResult(-1, AddGoodsPurchaseActivity.this.getIntent().putExtras(bundle));//执行回调事件;
-        AddGoodsPurchaseActivity.this.finish();
+        setResult(-1, AddGoods_2_Activity.this.getIntent().putExtras(bundle));//执行回调事件;
+        AddGoods_2_Activity.this.finish();
     }
 
 
@@ -649,22 +652,53 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
             Toast.makeText(this, "请选择商品", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        changeNum = AmountShowPolishing(fyGoodsNumber.getInput());
-        changePrice = AmountShowPolishing(fyPrice.getInputIsEmpty());
-        changeSum = AmountShowPolishing(fySumMoney.getInputIsEmpty());
-
-        String hintPrice = fyPrice.getHint();
-        String hintSum = fySumMoney.getHint();
+        strGoodsNumber = fyGoodsNumber.getInputIsEmpty();
+        strPrice = fyPrice.getInputIsEmpty();
 
 
-        if ("0".equals(changeNum)) {
-            Toast.makeText(this, "数量不为0", Toast.LENGTH_SHORT).show();
+        if (CalculationUtils.compare(strGoodsNumber, "0") != 1) {
+            Toast.makeText(this, "数量不能为 0", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (CalculationUtils.compare(strPrice, "0") != 1) {
+            Toast.makeText(this, "单价不能为 0", Toast.LENGTH_SHORT).show();
             return;
         }
 
 
         Bundle bundle = new Bundle();
+
+        changSumMoney = fySumMoney.getInput().toString();
+        strSumMoney = fySumMoney.getInputIsEmpty();
+
+        KLog.e("===== " + changSumMoney + " ===== " + strSumMoney + " =====" + fySumMoney.getHint());
+
+        if (TextUtils.isEmpty(changSumMoney)) {
+
+            if (CalculationUtils.compare(AmountShowBug(fySumMoney.getHint()), 0) != 1) {
+                Toast.makeText(this, "金额不能为 0", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            bundle.putString("goodsSum", fySumMoney.getHint());
+
+        } else {
+            if (CalculationUtils.compare(changSumMoney, "0") != 1) {
+                Toast.makeText(this, "金额不能为 0", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            bundle.putString("goodsSum", strSumMoney);
+        }
+
+
+        bundle.putString("goodsType", "1");
+        bundle.putString("goodsSysID", goodsSysID);
+        bundle.putString("goodsName", goodsName);
+        bundle.putString("goodsNum", strGoodsNumber);
+        bundle.putString("goodsPrice", strPrice);
+        bundle.putString("goodsUom", uom);
+        bundle.putString("unitID", unitID);
 
 
         for (Map.Entry<String, String> stringStringEntry : mapWareHouse.entrySet()) {
@@ -674,62 +708,8 @@ public class AddGoodsPurchaseActivity extends BaseActivity implements View.OnCli
         }
 
 
-        bundle.putString("goodsUom", uom);
-        bundle.putString("unitID", unitID);
-
-
-        bundle.putString("goodsType", "0");
-        bundle.putString("goodsSysID", goodsSysID);
-        bundle.putString("goodsName", goodsName);
-        bundle.putString("goodsNum", changeNum);
-        bundle.putString("goodsPrice", "0");
-        bundle.putString("goodsSum", "0");
-
-
-        bundle.putString("goodsType", "1");
-        bundle.putString("goodsSysID", goodsSysID);
-        bundle.putString("goodsName", goodsName);
-        bundle.putString("goodsNum", AmountShowPolishing(changeNum));
-
-
-//        if ("0.00".equals(hintPrice)) {
-//            Toast.makeText(this, "单价不为0", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-
-
-        if ("1".equals(fChooseAmount)) {//更改单价金额
-
-            if ("0".equals(changeSum)) {
-
-                if ("0".equals(changePrice)) {
-                    bundle.putString("goodsPrice", hintPrice);
-                    bundle.putString("goodsSum", hintSum);
-                } else {
-
-                    bundle.putString("goodsPrice", changePrice);
-                    bundle.putString("goodsSum", hintSum);
-                }
-
-            } else {
-
-
-                if ("0".equals(changePrice)) {
-                    bundle.putString("goodsPrice", hintPrice);
-                    bundle.putString("goodsSum", changeSum);
-                } else {
-                    bundle.putString("goodsPrice", changePrice);
-                    bundle.putString("goodsSum", changeSum);
-                }
-            }
-        } else {
-            bundle.putString("goodsPrice", "0");
-            bundle.putString("goodsSum", "0");
-        }
-
-
-        setResult(ADD_GOODS_REQ_CODE, AddGoodsPurchaseActivity.this.getIntent().putExtras(bundle));//执行回调事件;
-        AddGoodsPurchaseActivity.this.finish();
+        setResult(ADD_GOODS_REQ_CODE, AddGoods_2_Activity.this.getIntent().putExtras(bundle));//执行回调事件;
+        AddGoods_2_Activity.this.finish();
 
     }
 

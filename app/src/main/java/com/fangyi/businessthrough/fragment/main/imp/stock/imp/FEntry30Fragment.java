@@ -17,25 +17,25 @@ import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.fangyi.businessthrough.R;
-import com.fangyi.businessthrough.activity.business.AddGoodsActivity;
-import com.fangyi.businessthrough.adapter.business.MenuAddGoodsAdapter;
+import com.fangyi.businessthrough.activity.business.AddGoods_4_Activity;
+import com.fangyi.businessthrough.adapter.business.MenuAddGoodsAdapter30;
 import com.fangyi.businessthrough.base.BaseFragment;
 import com.fangyi.businessthrough.bean.business.PrintOrderMain;
 import com.fangyi.businessthrough.bean.system.FEntry_30_Set;
-import com.fangyi.businessthrough.parameter.SystemFieldValues;
 import com.fangyi.businessthrough.bean.system.User;
 import com.fangyi.businessthrough.bean.system.Users;
+import com.fangyi.businessthrough.bluetoothprint.PrintDataService;
+import com.fangyi.businessthrough.bluetoothprint.PrintUtil;
 import com.fangyi.businessthrough.dao.DBBusiness;
 import com.fangyi.businessthrough.dao.DBManager;
 import com.fangyi.businessthrough.data.Data;
-import com.fangyi.businessthrough.events.AddGoodsMessage;
-import com.fangyi.businessthrough.utils.system.RebootActivity;
+import com.fangyi.businessthrough.events.AddGoodsMessage30;
 import com.fangyi.businessthrough.http.NetConnectionUtil;
 import com.fangyi.businessthrough.http.WebUploadService;
+import com.fangyi.businessthrough.parameter.SystemFieldValues;
 import com.fangyi.businessthrough.utils.system.CommonUtils;
 import com.fangyi.businessthrough.utils.system.PrefUtils;
-import com.fangyi.businessthrough.bluetoothprint.PrintDataService;
-import com.fangyi.businessthrough.bluetoothprint.PrintUtil;
+import com.fangyi.businessthrough.utils.system.RebootActivity;
 import com.fangyi.businessthrough.view.DrawableCenterButton;
 import com.fangyi.businessthrough.view.FYBtnRadioView;
 import com.fangyi.businessthrough.view.FYLayoutManager;
@@ -56,11 +56,11 @@ import java.util.List;
 import java.util.Map;
 
 import static com.fangyi.businessthrough.application.FYApplication.ADD_GOODS_REQ_CODE;
-import static com.fangyi.businessthrough.utils.system.CommonUtils.getColor;
 import static com.fangyi.businessthrough.utils.business.DateUtil.getStrToDate;
 import static com.fangyi.businessthrough.utils.business.DateUtil.getTime;
 import static com.fangyi.businessthrough.utils.business.DateUtil.getTimeYYYY_MM_DD_HH_MM_SS;
 import static com.fangyi.businessthrough.utils.business.StrFormatUtils.getStringsFormat;
+import static com.fangyi.businessthrough.utils.system.CommonUtils.getColor;
 
 /**
  * 调拔单
@@ -102,13 +102,13 @@ public class FEntry30Fragment extends BaseFragment {
     private Map<String, String> mapRequester;//业务员
 
 
-    private List<AddGoodsMessage> goodsInfos = new ArrayList<>();//所有商品单
+    private List<AddGoodsMessage30> goodsInfos = new ArrayList<>();//所有商品单
 
     private double sums0;
     private double sums2;
 
 
-    private MenuAddGoodsAdapter mMenuAdapter;
+    private MenuAddGoodsAdapter30 mMenuAdapter;
 
 
     /**
@@ -124,7 +124,7 @@ public class FEntry30Fragment extends BaseFragment {
             switch (msg.what) {
                 case 0:
                     if (mMenuAdapter == null) {
-                        mMenuAdapter = new MenuAddGoodsAdapter(goodsInfos);
+                        mMenuAdapter = new MenuAddGoodsAdapter30(goodsInfos);
                         recyclerView1.setAdapter(mMenuAdapter);
 
                     } else {
@@ -299,10 +299,18 @@ public class FEntry30Fragment extends BaseFragment {
             fyFDCStock.setVisibility(View.GONE);
         }
 
+        if ("0".equals(fEntry30Set.fDStockPosition)) {
+            fyFDCStock.setVisibility(View.GONE);
+        }
+
 
         fyFSaleStyle.setTitle("调入仓库");
         fyFSaleStyle.setContent(mapWareHouse.get(fEntry30Set.fDCStockD));
         if ("0".equals(fEntry30Set.fDCStockV)) {
+            fyFSaleStyle.setVisibility(View.GONE);
+        }
+
+        if ("1".equals(fEntry30Set.fDStockPosition)) {
             fyFSaleStyle.setVisibility(View.GONE);
         }
 
@@ -581,16 +589,14 @@ public class FEntry30Fragment extends BaseFragment {
      * 打开添加商品页面
      */
     private void startAddGoods() {
-        Intent intent = new Intent(getActivity(), AddGoodsActivity.class);
-        intent.putExtra("addType", "0");
-        intent.putExtra("businessType", "1");//businessType
-        intent.putExtra("fChooseAmount", "0");//允许修改单价金额
-        intent.putExtra("fDCStockD", "0");//仓库
-        intent.putExtra("fStockPosition", "0");//仓库 在添加页面
-        intent.putExtra("fPlanPro", "0");//启用搭赠方案
+        Intent intent = new Intent(getActivity(), AddGoods_4_Activity.class);
+//
+        intent.putExtra("businessType", businessType);//businessType
+        intent.putExtra("fChooseAmount", fEntry30Set.fChooseAmount);//允许修改单价金额
+        intent.putExtra("fDCStockD", fEntry30Set.fDCStockD);//仓库
+        intent.putExtra("fStockPosition", fEntry30Set.fDStockPosition);//仓库 在添加页面
         intent.putExtra("userSysID", LoginUsers.userSysID);//传登陆用户ID
         intent.putExtra("kISID", LoginUsers.kISID);//传登陆用户KISID
-        intent.putExtra("fyFCustNameID", "");//传登陆用户KISID
 
         startActivityForResult(intent, ADD_GOODS_REQ_CODE);
 
@@ -774,16 +780,17 @@ public class FEntry30Fragment extends BaseFragment {
 
                 if (!TextUtils.isEmpty(bundle.getString("goodsUom"))) {
 
-                    AddGoodsMessage goosMessage = new AddGoodsMessage();
+                    AddGoodsMessage30 goosMessage = new AddGoodsMessage30();
                     goosMessage.setGoodsSysID(bundle.getString("goodsSysID"));
                     goosMessage.setGoodsName(bundle.getString("goodsName"));
                     goosMessage.setGoodsNum(bundle.getString("goodsNum"));
-                    goosMessage.setGoodsPrice("0");
-                    goosMessage.setGoodsSum("0");
+                    goosMessage.setGoodsPrice(bundle.getString("goodsPrice"));
+                    goosMessage.setGoodsSum(bundle.getString("goodsSum"));
                     goosMessage.setGoodsUom(bundle.getString("goodsUom"));
                     goosMessage.setUnitID(bundle.getString("unitID"));
-                    goosMessage.setGoodsType("4");
-                    goosMessage.setWareHouseSysId("");
+                    goosMessage.setGoodsType(bundle.getString("goodsType"));
+                    goosMessage.setWareHouseSysId1(bundle.getString("WareHouseSysId1"));
+                    goosMessage.setWareHouseSysId2(bundle.getString("WareHouseSysId2"));
                     goosMessage.setListGoodsType("0");
 
                     goodsInfos.add(goosMessage);

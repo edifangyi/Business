@@ -59,6 +59,7 @@ public class MainActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
+
         initJPush();
         initView();
         registerMessageReceiver();
